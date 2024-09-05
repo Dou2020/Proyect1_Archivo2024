@@ -10,9 +10,9 @@ CREATE SCHEMA contador;
 CREATE TABLE shop.subCursal(
   nombre VARCHAR(20) NOT NULL PRIMARY KEY
 );
-INSERT INTO shop.subCursal(nombre) VALUES ('PARQUE');
-INSERT INTO shop.subCursal(nombre) VALUES ('NORTE');
-INSERT INTO shop.subCursal(nombre) VALUES ('SUR');
+-- Realizar Insert de Subcursales predeterminadas 
+INSERT INTO shop.subCursal(nombre) 
+VALUES ('PARQUE'), ('CENTRO1'), ('CENTRO2'), ('GENERAL');
 
 -- empleado Cajero, Bodega, Inventario, Administrador -- 
 CREATE TABLE personal.empleado (
@@ -24,37 +24,34 @@ CREATE TABLE personal.empleado (
   estado VARCHAR(2) NOT NULL,
   FOREIGN KEY (subCursal) REFERENCES shop.subCursal(nombre)
 );
-INSERT INTO personal.empleado(usuario, password, name, rol, subCursal, estado) VALUES 
-('caj1', '1234', 'Edgar Gonzales', 'caj','CENTRAL','1'),
-('caj2', '1234', 'Brandon Gonzales', 'caj','NORTE','1'), 
-('caj3', '1234', 'Emily Gonzales', 'caj','SUR','1');
-
-INSERT INTO personal.empleado (usuario, password, name, rol, subCursal, estado) VALUES
-  ('caj4', '1234', 'John Doe', 'caj', 'CENTRAL', '1'),
-  ('caj5', '1234', 'Jane Smith', 'caj', 'NORTE', '1'),
-  ('caj6', '1234', 'Bob Johnson', 'caj', 'SUR', '1');
-
-INSERT INTO personal.empleado (usuario, password, name, rol, subCursal, estado)
-VALUES
-  ('bodeg1', '1234', 'Johns Doe', 'bod', 'CENTRAL', '1'),
-  ('bodeg2', '1234', 'Janes Smith', 'bod', 'NORTE', '1'),
-  ('bodeg3', '1234', 'Bobs Johnson', 'bod', 'SUR', '1');
 
 INSERT INTO personal.empleado(usuario, password, name, rol, subCursal, estado) VALUES 
-('inven1', '1234', 'Edgars Gonzales', 'inv','CENTRAL','1'),
-('inven2', '1234', 'Brandons Gonzales', 'inv','NORTE','1'), 
-('inven3', '1234', 'Emilys Gonzales', 'inv','SUR','1');
+    -- Insert de 2 user cajero en cada subcursal -- 
+    ('caj1', '1234', 'Edgar Gonzales', 'caj','PARQUE','1'),
+    ('caj2', '1234', 'Brandon Gonzales', 'caj','CENTRO1','1'), 
+    ('caj3', '1234', 'Emily Gonzales', 'caj','CENTRO2','1'),
+    ('caj4', '1234', 'John Doe', 'caj', 'PARQUE', '1'),
+    ('caj5', '1234', 'Jane Smith', 'caj', 'CENTRO1', '1'),
+    ('caj6', '1234', 'Bob Johnson', 'caj', 'CENTRO2', '1'),
+    -- Insert de user Bodega en cada Subcursal -- 
+    ('bodeg1', '1234', 'Johns Doe', 'bod', 'PARQUE', '1'),
+    ('bodeg2', '1234', 'Janes Smith', 'bod', 'CENTRO1', '1'),
+    ('bodeg3', '1234', 'Bobs Johnson', 'bod', 'CENTRO2', '1'),
+    -- Insert de user Inven en cada Subcursal -- 
+    ('inven1', '1234', 'Edgars Gonzales', 'inv','PARQUE','1'),
+    ('inven2', '1234', 'Brandons Gonzales', 'inv','CENTRO1','1'), 
+    ('inven3', '1234', 'Emilys Gonzales', 'inv','CENTRO2','1'),
+    -- Insert de user administrador de todas las subcursales -- 
+    ('admin','1234','Douglas Gomez','adm','GENERAL','1');
 
-INSERT INTO personal.empleado(usuario, password, name, rol, subCursal, estado) VALUES 
-('admin','1234','Douglas Gomez','adm','GENERAL','1');
-
+-- Tarjetas de puntos de los clientes -- 
 CREATE TABLE usuario.tarjeta(
     no_card VARCHAR(10) NOT NULL PRIMARY KEY,
     tipo VARCHAR(5) NOT NULL,
     puntos DECIMAL(12,4) NOT NULL,
     acumulado DECIMAL(12,4) NOT NULL
 );
-
+-- crear tabla cliente con id el NIT --
 CREATE TABLE usuario.cliente(
     nit VARCHAR(10) NOT NULL PRIMARY KEY,
     nombre VARCHAR(25) NOT NULL,
@@ -62,7 +59,7 @@ CREATE TABLE usuario.cliente(
     FOREIGN KEY (no_card) REFERENCES usuario.tarjeta(no_card)
 );
 
--- Insert of Cliente -- 
+-- Insert of 8 Cliente -- 
 INSERT INTO usuario.cliente(nit,nombre) VALUES 
 ('5264137891','Jhonn Doe'),
 ('5264137892','Janee Smith'),
@@ -75,14 +72,24 @@ INSERT INTO usuario.cliente(nit,nombre) VALUES
 
 -- Asigna una caja a un empleado.cajero -- 
 CREATE TABLE personal.caja (
-  user_empleado VARCHAR(9) NOT NULL,
-  --cod_cajero VARCHAR(9) NOT NULL PRIMARY KEY, --FORANEA Y PRIMARIA
-  no_caja VARCHAR(5) NOT NULL,
-  FOREIGN KEY (user_empleado) REFERENCES personal.empleado(usuario)
+    no_caja VARCHAR(5) NOT NULL,
+    sub_caja  VARCHAR(20) NOT NULL,
+    user_empleado VARCHAR(9),
+    FOREIGN KEY (sub_caja) REFERENCES shop.subcursal(nombre),
+    FOREIGN KEY (user_empleado) REFERENCES personal.empleado(usuario)
 );
 
-INSERT INTO shop.caja VALUES ('24876', 'A-1','24876');
-
+INSERT INTO shop.caja(no_caja,sub_caja) VALUES
+    -- INSERT de caja en cada subcursal --
+    ('C-1','PARQUE'),
+    ('C-2','PARQUE'),
+    ('C-3','PARQUE'),
+    ('C-1','CENTRO1'),
+    ('C-2','CENTRO1'),
+    ('C-3','CENTRO1'),
+    ('C-1','CENTRO2'),
+    ('C-2','CENTRO2'),
+    ('C-3','CENTRO2');
 
 -- ingreso de porducto --
 CREATE TABLE almacen.producto(
