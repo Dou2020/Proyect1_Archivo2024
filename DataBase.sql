@@ -80,7 +80,7 @@ INSERT INTO usuario.cliente(nit,nombre) VALUES
 -- UPDATE usuario Jhonn Doe asignando tarjeta -- 
 UPDATE usuario.cliente SET no_card = '1234' WHERE nit = '5264137891';
 
--- 
+-- Join Para ejecucion -- 
 
 
 -- Asigna una caja a un empleado.cajero -- 
