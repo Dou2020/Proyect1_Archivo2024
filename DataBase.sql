@@ -56,7 +56,12 @@ CREATE TABLE usuario.tarjeta(
     acumulado DECIMAL(12,4) NOT NULL
 );
 -- INSERT tarjeta 
-INSERT INTO usuario.tarjeta(no_card,tipo,puntos,acumulado) VALUES('1234','C',500.00,600.00);
+INSERT INTO usuario.tarjeta(no_card,tipo,puntos,acumulado) VALUES
+('1234','C',500.00,600.00),
+('1235','O',500.00,600.00),
+('1236','P',500.00,600.00),
+('1237','D',500.00,600.00)
+;
 
 -- crear tabla cliente con id el NIT --
 CREATE TABLE usuario.cliente(
@@ -79,9 +84,6 @@ INSERT INTO usuario.cliente(nit,nombre) VALUES
 
 -- UPDATE usuario Jhonn Doe asignando tarjeta -- 
 UPDATE usuario.cliente SET no_card = '1234' WHERE nit = '5264137891';
-
--- Join Para ejecucion -- 
-
 
 -- Asigna una caja a un empleado.cajero -- 
 CREATE TABLE personal.caja (
