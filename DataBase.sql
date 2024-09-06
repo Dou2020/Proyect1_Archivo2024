@@ -1,5 +1,9 @@
-CREATE DATABASE webSiteShop;
--- Creando Shemas -- 
+-- Crear la base de datos
+CREATE DATABASE web_shop;
+
+-- ingresar a la base de datos en postgres
+\c web_shop;
+-- Creando Shemas
 CREATE SCHEMA shop;
 CREATE SCHEMA almacen;
 CREATE SCHEMA personal;
@@ -51,6 +55,9 @@ CREATE TABLE usuario.tarjeta(
     puntos DECIMAL(12,4) NOT NULL,
     acumulado DECIMAL(12,4) NOT NULL
 );
+-- INSERT tarjeta 
+INSERT INTO usuario.tarjeta(no_card,tipo,puntos,acumulado) VALUES('1234','C',500.00,600.00);
+
 -- crear tabla cliente con id el NIT --
 CREATE TABLE usuario.cliente(
     nit VARCHAR(10) NOT NULL PRIMARY KEY,
@@ -70,6 +77,12 @@ INSERT INTO usuario.cliente(nit,nombre) VALUES
 ('5264137897','Fancisco Lopez'),
 ('5264137898','Laura Gil');
 
+-- UPDATE usuario Jhonn Doe asignando tarjeta -- 
+UPDATE usuario.cliente SET no_card = '1234' WHERE nit = '5264137891';
+
+-- 
+
+
 -- Asigna una caja a un empleado.cajero -- 
 CREATE TABLE personal.caja (
     no_caja VARCHAR(5) NOT NULL,
@@ -78,16 +91,17 @@ CREATE TABLE personal.caja (
     FOREIGN KEY (sub_caja) REFERENCES shop.subcursal(nombre),
     FOREIGN KEY (user_empleado) REFERENCES personal.empleado(usuario)
 );
-
-INSERT INTO shop.caja(no_caja,sub_caja) VALUES
+INSERT INTO personal.caja(no_caja,sub_caja,user_empleado) VALUES
+    -- INSERT de caja a empleado en cada subcursal --
+    ('C-1','PARQUE','caj1'),
+    ('C-1','CENTRO1','caj2'),
+    ('C-1','CENTRO2','caj3');
+INSERT INTO personal.caja(no_caja,sub_caja) VALUES
     -- INSERT de caja en cada subcursal --
-    ('C-1','PARQUE'),
     ('C-2','PARQUE'),
     ('C-3','PARQUE'),
-    ('C-1','CENTRO1'),
     ('C-2','CENTRO1'),
     ('C-3','CENTRO1'),
-    ('C-1','CENTRO2'),
     ('C-2','CENTRO2'),
     ('C-3','CENTRO2');
 
