@@ -1,4 +1,4 @@
--- Crear la base de datos
+-- Crear la base de datos --
 CREATE DATABASE web_shop;
 
 -- ingresar a la base de datos en postgres
@@ -14,6 +14,7 @@ CREATE SCHEMA contador;
 CREATE TABLE shop.subCursal(
   nombre VARCHAR(20) NOT NULL PRIMARY KEY
 );
+
 -- Realizar Insert de Subcursales predeterminadas 
 INSERT INTO shop.subCursal(nombre) 
 VALUES ('PARQUE'), ('CENTRO1'), ('CENTRO2'), ('GENERAL');
@@ -55,6 +56,7 @@ CREATE TABLE usuario.tarjeta(
     puntos DECIMAL(12,4) NOT NULL,
     acumulado DECIMAL(12,4) NOT NULL
 );
+
 -- INSERT tarjeta 
 INSERT INTO usuario.tarjeta(no_card,tipo,puntos,acumulado) VALUES
 ('1234','C',500.00,10000.00),
