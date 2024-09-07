@@ -57,11 +57,10 @@ CREATE TABLE usuario.tarjeta(
 );
 -- INSERT tarjeta 
 INSERT INTO usuario.tarjeta(no_card,tipo,puntos,acumulado) VALUES
-('1234','C',500.00,600.00),
-('1235','O',500.00,600.00),
-('1236','P',500.00,600.00),
-('1237','D',500.00,600.00)
-;
+('1234','C',500.00,10000.00),
+('1235','O',500.00,20000.00),
+('1236','P',500.00,30000.00),
+('1237','D',500.00,600.00);
 
 -- crear tabla cliente con id el NIT --
 CREATE TABLE usuario.cliente(
@@ -71,19 +70,19 @@ CREATE TABLE usuario.cliente(
     FOREIGN KEY (no_card) REFERENCES usuario.tarjeta(no_card)
 );
 
--- Insert of 8 Cliente -- 
-INSERT INTO usuario.cliente(nit,nombre) VALUES 
-('5264137891','Jhonn Doe'),
-('5264137892','Janee Smith'),
-('5264137893','Bobb Johson'),
-('5264137894', 'Juan Martinez'),
+-- Insert of 4 Cliente with no_card -- 
+INSERT INTO usuario.cliente(nit,nombre,no_card) VALUES 
+('5264137891','Jhonn Doe','1234'),
+('5264137892','Janee Smith','1235'),
+('5264137893','Bobb Johson','1236'),
+('5264137894', 'Juan Martinez','1237');
+
+-- Insert of 4 Cliente N/A --
+INSERT INTO usuario.cliente(nit,nombre) VALUES
 ('5264137895','Devora Lux'),
 ('5264137896','Ana de la Rosa'),
 ('5264137897','Fancisco Lopez'),
 ('5264137898','Laura Gil');
-
--- UPDATE usuario Jhonn Doe asignando tarjeta -- 
-UPDATE usuario.cliente SET no_card = '1234' WHERE nit = '5264137891';
 
 -- Asigna una caja a un empleado.cajero -- 
 CREATE TABLE personal.caja (
