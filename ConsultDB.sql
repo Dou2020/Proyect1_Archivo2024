@@ -80,6 +80,7 @@ BEGIN
       ELSE 
         RAISE EXCEPTION 'TIPO INVALIDO';
     END CASE;   
+    
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
@@ -89,6 +90,7 @@ CREATE TRIGGER ajustar_acumulado_cliente
 BEFORE UPDATE ON usuario.tarjeta
 FOR EACH ROW
 EXECUTE FUNCTION usuario.ajustar_acumulado();
+
 
 
 CREATE OR REPLACE FUNCTION usuario.update_tipo_tarjeta(card VARCHAR)
