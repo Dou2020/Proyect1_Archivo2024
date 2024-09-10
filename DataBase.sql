@@ -1,3 +1,4 @@
+-- Active: 1725939132344@@127.0.0.1@5432@web_shop
 -- Crear la base de datos --
 CREATE DATABASE web_shop;
 
