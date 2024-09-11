@@ -112,9 +112,9 @@ INSERT INTO personal.caja(no_caja,sub_caja) VALUES
 -- ingreso de porducto --
 CREATE TABLE almacen.producto(
   Cod_producto VARCHAR(8) NOT NULL PRIMARY KEY,
-  name VARCHAR(25) NOT NULL,
-  precio DECIMAL(12,4) NOT NULL
+  name VARCHAR(25) NOT NULL
 );
+
 -- UPDATE PRODUCT --
 UPDATE almacen.producto SET name='Sweater1', precio='424.5691' WHERE cod_producto='prod75';
 --insert of the product --
@@ -153,6 +153,7 @@ END $$;
 CREATE TABLE almacen.bodega(
   subCursal VARCHAR(20) NOT NULL,
   Cod_producto VARCHAR(10) NOT NULL,
+  precio DECIMAL(12,4) NOT NULL,
   cantidad INT NOT NULL,
   FOREIGN KEY (Cod_producto) REFERENCES almacen.producto(cod_producto),
   FOREIGN KEY (subCursal) REFERENCES shop.subCursal(nombre)
@@ -261,3 +262,5 @@ CREATE TABLE contador.producto_vendido(
   FOREIGN KEY (cod_producto) REFERENCES almacen.producto(cod_producto),
   FOREIGN KEY (no_factura) REFERENCES contador.factura(no_factura)
 );
+
+DROP SCHEMA public;
