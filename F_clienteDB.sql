@@ -156,3 +156,4 @@ CREATE TRIGGER ajustar_acumulado_cliente
 BEFORE UPDATE ON usuario.tarjeta
 FOR EACH ROW
 EXECUTE FUNCTION usuario.ajustar_acumulado();
+
