@@ -12,11 +12,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Rutas
-app.post('/api/empleado', async (req, res) => {
+app.post('/api/empleado_type', async (req, res) => {
   try {
     const {user, pass} = req.body;
     console.log(user+" "+pass)
     const result = await dbConnect.connect().query('SELECT personal.type_personal($1,$2)',[ user , pass ]);
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+app.post('/api/empleado_exist', async (req, res) => {
+  try {
+    const {user, pass} = req.body;
+    console.log(user+" "+pass)
+    const result = await dbConnect.connect().query('SELECT personal.exist_personal($1,$2)',[ user , pass ]);
     res.json(result.rows);
   } catch (err) {
     res.status(500).send(err.message);
