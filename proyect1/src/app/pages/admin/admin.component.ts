@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './admin.component.css'
 })
 export class AdminComponent {
-
+  categoria: number = 0;
 }
