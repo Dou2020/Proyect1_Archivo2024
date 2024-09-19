@@ -5,7 +5,7 @@ const dbConnect = require('./ConectionDB/conectDB');
 module.exports = (app) => {
     
     // Existe el empleado
-    app.post('/api/empleado_exist', async (req, res) => {
+    app.post('/api/empleado/exist', async (req, res) => {
         try {
 
         // requiere usuario y password
@@ -18,11 +18,11 @@ module.exports = (app) => {
         }
       });
     
-    app.post('/api/empleado_type', async (req, res) => {
+    app.post('/api/empleado/type', async (req, res) => {
         try {
-          const {user, pass} = req.body;
-          console.log(user+" "+pass)
-          const result = await dbConnect.connect().query('SELECT personal.type_personal($1,$2)',[ user , pass ]);
+          const {usuario, pass} = req.body;
+          console.log(usuario+" "+pass)
+          const result = await dbConnect.connect().query('SELECT personal.type_personal($1,$2)',[ usuario , pass ]);
           res.json(result.rows);
         } catch (err) {
           res.status(500).send(err.message);

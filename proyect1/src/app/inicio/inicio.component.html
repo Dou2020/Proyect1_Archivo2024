@@ -12,7 +12,7 @@
     <div class="col-sm-12">
       
       <div class="col-md-4 offset-md-3">
-        <form action="localhost:3002/api/empelado" method="post">
+        <form [formGroup]="userForm" (submit)="handleSubmit()">
           <img
             class="mb-3"
             src="https://static.thenounproject.com/png/178831-200.png"
@@ -29,6 +29,7 @@
               id="email_employeer"
               placeholder="Usuario"
               name="user"
+              formControlName="usuario"
             />
             <label for="floatingInput">Usuario</label>
           </div>
@@ -39,6 +40,7 @@
               id="pass_employeer"
               placeholder="Password"
               name="pass"
+              formControlName="pass"
             />
             <label for="floatingPassword">Password</label>
           </div>

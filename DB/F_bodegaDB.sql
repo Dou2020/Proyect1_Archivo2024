@@ -35,3 +35,26 @@ BEGIN
     END IF;
 END;
 $$ LANGUAGE plpgsql
+
+DROP VIEW almacen.product_bodega;
+CREATE VIEW almacen.product_bodega AS
+SELECT COALESCE(a.subcursal,'N/A') AS subcursal, b.cod_producto, b.name, COALESCE(a.cantidad, 0) AS cantidad, COALESCE(a.precio,0.0) AS precio
+FROM almacen.bodega a 
+RIGHT JOIN almacen.producto b 
+ON a.cod_producto = b.cod_producto;
+
+SELECT * FROM almacen.product_bodega WHERE subcursal='N/A';
+
+CREATE OR REPLACE FUNCTION almacen.insert_producto(sub VARCHAR)
+RETURNS void AS $$
+DECLARE
+
+BEGIN
+    RETURN CREATE VIEW almacen.product_bodega AS
+            SELECT * FROM almacen.bodega a 
+            INNER JOIN almacen.producto b 
+            ON a.cod_producto = b.cod_producto
+            WHERE a.subcursal=sub;
+
+END;
+$$ LANGUAGE plpgsql

@@ -13,4 +13,15 @@ module.exports = (app) => {
           res.status(500).send(err.message);
         }
       });
+      app.post('/api/bodega/selectProduct', async (req, res) => {
+        try {
+            // requiere producto insert (subcursal)
+          const {sub} = req.body || null;
+          console.log(sub);
+          const result = await dbConnect.connect().query('SELECT * FROM almacen.product_bodega WHERE subcursal=$1',[ sub ]);
+          res.json(result.rows);
+        } catch (err) {
+          res.status(500).send(err.message);
+        }
+      });
 }
