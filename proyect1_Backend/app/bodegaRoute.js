@@ -18,7 +18,7 @@ module.exports = (app) => {
             // requiere producto insert (subcursal)
           const {sub} = req.body || null;
           console.log(sub);
-          const result = await dbConnect.connect().query('SELECT * FROM almacen.product_bodega WHERE subcursal=$1',[ sub ]);
+          const result = await dbConnect.connect().query('SELECT * FROM almacen.product_bodega WHERE subcursal=$1 OR subcursal=$2',[ sub,"N/A" ]);
           res.json(result.rows);
         } catch (err) {
           res.status(500).send(err.message);

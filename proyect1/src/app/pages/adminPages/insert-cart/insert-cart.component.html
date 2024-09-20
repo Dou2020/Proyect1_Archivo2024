@@ -1,0 +1,39 @@
+<div
+  class="d-flex justify-content-center text-bg-secondary"
+  style="height: 100vh; width: 82vw"
+>
+  <div class="d-flex flex-column">
+    <div class="table-responsive">
+    <table class="table table-secondary table-hover caption-top" style="width: 60vw;">
+        <caption>Listado Cliente-Tarjeta</caption>
+        <thead>
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Puntos</th>
+            <th scope="col">Acumulado</th>
+            <th scope="col">Subir</th>
+          </tr>
+        </thead>
+        <tbody>
+            @for (clientCard of clientCards; track $index) {
+                <tr>
+                        <th scope="row">{{clientCard.no_card}}</th>
+                        <td>{{clientCard.nombre}}</td>
+                        <td>{{clientCard.type_card}}</td>
+                        <td>{{clientCard.puntos}}</td>
+                        <td>{{clientCard.acumulado}}</td>
+                        <td>
+                            <button type="button" [class]="tipoButton(clientCard.subir)" (click)="postUpdate()">
+                                {{clientCard.subir}}
+                            </button>
+                        </td>
+                </tr>
+            }
+        </tbody>
+      </table>
+    </div>
+    
+  </div>
+</div>

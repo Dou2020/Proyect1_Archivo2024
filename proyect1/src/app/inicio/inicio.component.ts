@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 
 export class InicioComponent implements OnInit{
   
+
   userForm: FormGroup;
   user: FormControl;
   pass: FormControl;

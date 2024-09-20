@@ -1,0 +1,38 @@
+<div
+  class="d-flex justify-content-center text-bg-secondary"
+  style="height: 100vh; width: 82vw"
+>
+  <div class="d-flex flex-column">
+    <div class="table-responsive">
+        <table class="table table-secondary table-hover caption-top" style="width: 60vw;">
+            <caption>Listado de Producto</caption>
+            <thead>
+              <tr>
+                <th scope="col">COD.</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Subcursal</th>
+                <th scope="col">Opcion</th>
+              </tr>
+            </thead>
+            <tbody>
+                @for (product of products; track $index) {
+                    <tr>
+                            <th scope="row">{{product.cod_producto}}</th>
+                            <td>{{product.name}}</td>
+                            <td>{{product.precio}}</td>
+                            <td>{{product.cantidad}}</td>
+                            <td>{{product.subcursal}}</td>
+                            <td>
+                                <button type="button" [class]="tipoButton(product.subcursal)" (click)="postUpdate()">
+                                    {{tipoOpcion(product.subcursal)}}
+                                </button>
+                            </td>
+                    </tr>
+                }
+            </tbody>
+          </table>
+        </div>
+  </div>
+</div>
