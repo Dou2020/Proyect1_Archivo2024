@@ -1,1 +1,52 @@
-<p>create-empleado works!</p>
+<div class="flex justify-content-center align-content-center flex-wrap" style=" min-height: 60%; min-width: 800px;">
+  <div class="flex align-items-center justify-content-center">
+      <form
+        class="example-form "
+      >
+      <h1>Ingresar Empleado</h1>
+        <mat-form-field class="example-full-width">
+          <mat-label>Usuario</mat-label>
+          <input matInput placeholder="Ex. CAJERO1" />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Nombre</mat-label>
+          <input matInput placeholder="Ex. Alejandro" />
+        </mat-form-field>
+        <mat-form-field style="width: 100%">
+          <mat-label>Select Rol</mat-label>
+          <mat-select>
+            <mat-option value="one">CAJERO</mat-option>
+            <mat-option value="two">BODEGA</mat-option>
+            <mat-option value="two">INVENTARIO</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field style="width: 100%">
+          <mat-label>Select Subcursal</mat-label>
+          <mat-select>
+            <mat-option value="one">PARQUE</mat-option>
+            <mat-option value="two">CENTRO 1</mat-option>
+            <mat-option value="two">CENTRO 2</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class=" example-full-width ">
+          <mat-label>Enter your password</mat-label>
+          <input matInput [type]="hide() ? 'password' : 'text'" />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="clickEvent($event)"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide()"
+          >
+            <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+        <div class="overflow-hidden">
+        <div class="flex justify-content-center">
+          <button mat-flat-button style="width: 100%;">Enviar</button>
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
+
