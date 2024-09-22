@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import {AsyncPipe} from '@angular/common';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -10,6 +10,8 @@ import {MatButtonModule} from '@angular/material/button';
 
 import { HeaderBodegaComponent } from "../header-bodega/header-bodega.component";
 import { AddProductComponent } from '../add-product/add-product.component';
+import { ActivatedRoute } from '@angular/router';
+import { EmployeerService } from '../../../services/employeer.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -29,6 +31,17 @@ import { AddProductComponent } from '../add-product/add-product.component';
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.css'
 })
-export class ProductDetailComponent {
+export class ProductDetailComponent implements OnInit {
+
+  codProduct: string = "";
+  user: {usuario:string} = {usuario:""};
+
+  constructor(private route: ActivatedRoute, private employeer: EmployeerService){
+    this.codProduct = route.snapshot.params['codProduct'];
+    this.user = employeer.getUsuario();
+  }
+
+  ngOnInit(): void {
+  }
 
 }

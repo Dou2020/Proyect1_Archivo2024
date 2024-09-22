@@ -14,7 +14,7 @@ export const routes: Routes = [
     {path:'bodega',component:BodegaComponent},
     {path:'bodega/viewProduct', component:BodegaComponent},
     {path:'bodega/addProduct', component:ProductDetailComponent},
-    {path:'bodega/productDetail/:codProduct   ', component:ProductDetailComponent},
+    {path:'bodega/productDetail/:codProduct', component:ProductDetailComponent},
     {path:'cajero',component:CajeroComponent},
     {path:'inven',component:InvenComponent},
 ];

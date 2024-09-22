@@ -29,7 +29,7 @@ import { ViewProductService } from '../../../services/bodega/view-product.servic
 })
 export class AddProductComponent implements OnInit{
   
-  producto: any[] = [];
+  producto: any[] = [{cantidad:""}];
 
   // Input of form update 
   @Input() codigo: string = "";
@@ -37,9 +37,9 @@ export class AddProductComponent implements OnInit{
   constructor(private product:ViewProductService){}
 
   ngOnInit(): void { 
-
+    //console.log(this.codigo)
     const userForm: any = new FormGroup({
-      cod: new FormControl('P0'),
+      cod: new FormControl(this.codigo),
       sub: new FormControl('CENTRO1'),
     });
 

@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewProductService } from "./../../../services/bodega/view-product.service";
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-view-product',
   standalone: true,
-  imports: [],
+  imports: [
+    RouterLink
+  ],
   templateUrl: './view-product.component.html',
   styleUrl: './view-product.component.css'
 })
@@ -29,7 +32,7 @@ export class ViewProductComponent implements OnInit{
   
     this.producto.postProduct(bodega.value).subscribe({
       next:(value) =>{
-        console.log(value);
+        //console.log(value);
         this.products = value
       },error:(err) =>{
         console.log(err);   

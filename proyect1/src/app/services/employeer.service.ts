@@ -10,10 +10,15 @@ export class EmployeerService {
   
   constructor(private http: HttpClient) { }
 
+  private usuario: { user: string; } = {user:""} ;
 
   postType(user:any[]) {
-    console.log("service ",user);
+    this.usuario = user[0].usuario;
+    console.log(user[0])
     return this.http.post<any[]>(this.apiUrl,user);
+  }
+  getUsuario(){
+    return this.usuario;
   }
 
 }

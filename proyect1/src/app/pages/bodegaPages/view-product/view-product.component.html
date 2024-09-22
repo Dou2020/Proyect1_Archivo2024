@@ -25,7 +25,7 @@
                             <td>{{product.cantidad}}</td>
                             <td>{{product.subcursal}}</td>
                             <td>
-                                <button type="button" [class]="tipoButton(product.subcursal)" (click)="postUpdate()">
+                                <button type="button" [class]="tipoButton(product.subcursal)" (click)="postUpdate()" routerLink="/bodega/productDetail/{{product.cod_producto}}">
                                     {{tipoOpcion(product.subcursal)}}
                                 </button>
                             </td>

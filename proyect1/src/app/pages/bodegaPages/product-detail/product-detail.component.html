@@ -14,11 +14,11 @@
   <body>
     <main class="d-flex flex-nowrap">
       <!-- Header en bodega Opciones de ver y ingresar producto -->
-      <app-header-bodega usuario="Bod1" seleccionar="2"></app-header-bodega>
+      <app-header-bodega usuario={{user.usuario}} seleccionar="2"></app-header-bodega>
 
       <div class="b-example-divider b-example-vr"></div>
         <!-- Form of Update Product -->
-        <app-add-product codigo="HELLO"></app-add-product>
+        <app-add-product codigo={{codProduct}}></app-add-product>
 
     </main>
     <!-- Script de boostrap -->
