@@ -1,1 +1,39 @@
-<p>add-product works!</p>
+<div class="flex justify-content-center align-content-center flex-wrap" style=" min-height: 60%; min-width: 800px;">
+    <div class="flex align-items-center justify-content-center">
+        <form
+          class="example-form"
+        >
+        <h1>Ingresar Producto</h1>
+          <mat-form-field class="example-full-width">
+            <mat-label>Código del Producto</mat-label>
+            <input matInput placeholder="Ex. producto" value={{producto[0].cod_producto}} /> 
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Ex. Alejandro" value={{producto[0].name}} />
+          </mat-form-field>
+          <!-- Ingresar Precio del producto -->
+          <mat-form-field class="example-full-width" floatLabel="always">
+            <mat-label>Precio</mat-label>
+            <input matInput type="number" class="example-right-align" placeholder="0" value={{producto[0].precio}} />
+            <span matTextPrefix>Q&nbsp;</span>
+            <span matTextSuffix>.00</span>
+          </mat-form-field>
+          <!-- Ingresar Cantidad del producto -->
+          <mat-form-field class="example-full-width" floatLabel="always">
+            <mat-label>Cantidad</mat-label>
+            <input matInput type="number" class="example-right-align" placeholder="0" />
+          </mat-form-field>
+          <!-- Ingreso de subcursal desabilitado -->
+          <mat-form-field class="example-full-width">
+            <mat-label>Subcursal</mat-label>
+            <input matInput disabled value="CENTRO1">
+          </mat-form-field>
+          <div class="overflow-hidden">
+          <div class="flex justify-content-center">
+            <button mat-flat-button style="width: 100%;">Ingresar Producto</button>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
