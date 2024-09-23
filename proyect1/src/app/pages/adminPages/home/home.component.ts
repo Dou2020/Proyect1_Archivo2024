@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ViewEmployeesService } from '../../../services/admin/view-employees.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,25 @@ import { Component } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+
+  employeers: any[] = [];
+  
+  constructor(private employees:ViewEmployeesService){}
+
+  ngOnInit(): void {
+      this.listEmployeers()
+  }
+
+  listEmployeers(){
+    this.employees.getviewEmployees().subscribe({
+      next: (value) => {
+        this.employeers = value;
+      },error:(err) =>{
+        console.log(err);
+      }
+    })
+  }
+
 
 }

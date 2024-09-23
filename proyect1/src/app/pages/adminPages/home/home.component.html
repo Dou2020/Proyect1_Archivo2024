@@ -1,1 +1,52 @@
-<p>home works!</p>
+<div
+  class="d-flex justify-content-center text-bg-secondary"
+  style="height: 100vh; width: 82vw"
+>
+  <div class="d-flex flex-column">
+    <div class="table-responsive">
+      <table
+        class="table table-secondary table-hover caption-top"
+        style="width: 60vw"
+      >
+        <caption>
+          Listado Empleado
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Usuario</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Subcursal</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Editar</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (employeer of employeers; track $index) {
+          <tr>
+            <th scope="row">{{ employeer.usuario }}</th>
+            <td>{{ employeer.name }}</td>
+            <td>{{ employeer.rol }}</td>
+            <td>{{ employeer.subcursal }}</td>
+            <td>
+              <!-- Estado del empleado -->
+              <div class="form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  id="flexSwitchCheckChecked"
+                  checked
+                />
+              </div>
+            </td>
+            <td>
+              <button type="button" class="btn btn-warning">Editar</button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
