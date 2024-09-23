@@ -37,8 +37,8 @@ export class ProductDetailComponent implements OnInit {
   usuario: any[] = [];
 
   constructor(private router: Router ,private route: ActivatedRoute, private employeer: EmployeerService){
+    
     this.codProduct = route.snapshot.params['codProduct'];
-
     this.usuario = employeer.getUsuario();
   }
 

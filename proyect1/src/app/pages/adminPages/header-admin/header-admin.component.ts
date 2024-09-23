@@ -1,9 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { EmployeerService } from '../../../services/employeer.service';
 
 @Component({
   selector: 'app-header-admin',
   standalone: true,
-  imports: [],
+  imports: [
+    RouterLink
+  ],
   templateUrl: './header-admin.component.html',
   styleUrl: './header-admin.component.css'
 })
@@ -17,7 +21,11 @@ export class HeaderAdminComponent implements OnInit{
   classReporte: string[] = this.comun;
   classTarjeta: string[] = this.comun;
 
+
+  @Input() usuario: any[] = [];
   @Input() categoria: string = "";
+
+  constructor(private router:Router, private employee: EmployeerService){}
   
   ngOnInit(): void {
     this.updatePage();      
@@ -46,6 +54,12 @@ export class HeaderAdminComponent implements OnInit{
       default:
         break;
     }
+  }
+
+  cerrarSesion(){
+    console.log("cerrarSesion")
+    this.employee.setUsuario([]);
+    this.router.navigate(['/']);
   }
 
 

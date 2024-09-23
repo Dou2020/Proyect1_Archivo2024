@@ -10,6 +10,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { HeaderBodegaComponent } from '../header-bodega/header-bodega.component';
 import { ViewProductService } from '../../../services/bodega/view-product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-product',
@@ -33,24 +34,27 @@ export class AddProductComponent implements OnInit{
 
   // Input of form update 
   @Input() codigo: string = "";
+  @Input() subcursal: string="";
 
-  constructor(private product:ViewProductService){}
+  constructor(private product:ViewProductService, private router: Router){}
 
   ngOnInit(): void { 
     //console.log(this.codigo)
-    const userForm: any = new FormGroup({
-      cod: new FormControl(this.codigo),
-      sub: new FormControl('CENTRO1'),
-    });
-
-    this.product.postProductDetail( userForm.value ).subscribe({
-      next:(value) =>{
-        console.log(value)
-        this.producto = value;
-      },error(err){
-        console.log(err)
-      }
-    })
+    if (this.codigo !== "") {
+      const userForm: any = new FormGroup({
+        cod: new FormControl(this.codigo),
+        sub: new FormControl(this.subcursal),
+      });
+  
+      this.product.postProductDetail( userForm.value ).subscribe({
+        next:(value) =>{
+          console.log(value)
+          this.producto = value;
+        },error(err){
+          console.log(err)
+        }
+      })
+    }
 
   }
 
@@ -58,6 +62,10 @@ export class AddProductComponent implements OnInit{
   clickEvent(event: MouseEvent) {
     this.hide.set(!this.hide());
     event.stopPropagation();
+  }
+
+  clickBotton(){
+    this.router.navigate(['/bodega'])
   }
 
 }

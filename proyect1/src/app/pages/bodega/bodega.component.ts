@@ -20,12 +20,15 @@ export class BodegaComponent implements OnInit {
     constructor(private employee:EmployeerService, private router: Router){
       this.usuario = employee.getUsuario();
       console.log("component: ")
-      console.log(this.usuario)
+      //console.log(this.usuario)
 
     }
 
     ngOnInit(): void {
       if (this.usuario.length != 1) {
+        this.router.navigate(['/'])
+      }
+      if (this.usuario[0]?.rol != "bod") {
         this.router.navigate(['/'])
       }
     }

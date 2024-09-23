@@ -14,7 +14,7 @@
   <body>
     <main class="d-flex flex-nowrap">
       <!-- Header of opcion select in ADMIN -->
-      <app-header-admin categoria="1"></app-header-admin>
+      <app-header-admin categoria="1" [usuario]=" (usuario.length == 1)? usuario : [] " ></app-header-admin>
 
       <div class="b-example-divider b-example-vr"></div>
       <!-- VIEW INIT IN ADMIN -->

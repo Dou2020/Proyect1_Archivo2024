@@ -32,8 +32,14 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql
 
+DROP VIEW personal.view_employees;
+
 -- Crear una vista de empleados --
-CREATE VIEW personal.view_employees AS SELECT * FROM personal.empleado WHERE rol != 'adm';
+CREATE VIEW personal.view_employees AS 
+SELECT usuario,name,rol,subcursal,estado 
+FROM personal.empleado 
+WHERE rol != 'adm'
+ORDER BY subcursal;
 
 SELECT * FROM personal.view_employees
 

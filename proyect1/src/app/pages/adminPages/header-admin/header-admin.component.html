@@ -11,12 +11,12 @@ style="width: 280px; height: 100vh;"
 <a
     class="d-flex align-items-center mb-3 mb-md-0 me-md-3 text-white text-decoration-none"
 >
-    <span class="fst-italic fs-5">Admin</span>
+<span class="fst-italic fs-5">{{ (usuario[0]) ? usuario[0].usuario : "" }}</span>
 </a>
 <hr/>
 <ul class="nav nav-pills flex-column mb-auto">
   <li class="nav-item">
-    <a [class]="classHome" aria-current="page" >
+    <a [class]="classHome" aria-current="page" routerLink="/admin/viewUsers">
       <svg class="bi pe-none me-2" width="16" height="16">
         <use xlink:href="#home" />
       </svg>
@@ -24,7 +24,7 @@ style="width: 280px; height: 100vh;"
     </a>
   </li>
   <li>
-    <a [class]="classEmpleado" >
+    <a [class]="classEmpleado" routerLink="/admin/insertUser" >
       <svg class="bi pe-none me-2" width="16" height="16">
         <use xlink:href="#speedometer2" />
       </svg>
@@ -32,7 +32,7 @@ style="width: 280px; height: 100vh;"
     </a>
   </li>
   <li>
-    <a [class]="classReporte" >
+    <a [class]="classReporte" routerLink="/admin" >
       <svg class="bi pe-none me-2" width="16" height="16">
         <use xlink:href="#table" />
       </svg>
@@ -40,7 +40,7 @@ style="width: 280px; height: 100vh;"
     </a>
   </li>
   <li>
-    <a [class]="classTarjeta" >
+    <a [class]="classTarjeta" routerLink="/admin/viewCard" >
       <svg class="bi pe-none me-2" width="16" height="16">
         <use xlink:href="#grid" />
       </svg>
@@ -49,4 +49,5 @@ style="width: 280px; height: 100vh;"
   </li>
 </ul>
 <hr />
+<button type="button" class="btn btn-danger" (click)="cerrarSesion()">Cerrar Session</button>
 </div>
