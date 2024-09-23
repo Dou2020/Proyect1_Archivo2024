@@ -14,7 +14,7 @@
   <body>
     <main class="d-flex flex-nowrap">
       <!-- Header en bodega Opciones de ver y ingresar producto -->
-      <app-header-bodega usuario={{user.usuario}} seleccionar="2"></app-header-bodega>
+      <app-header-bodega seleccionar="2" [usuario]="(usuario.length==1)? usuario : []"></app-header-bodega>
 
       <div class="b-example-divider b-example-vr"></div>
         <!-- Form of Update Product -->

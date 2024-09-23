@@ -45,10 +45,18 @@ export class InicioComponent implements OnInit{
     })
   }
   handleSubmit(): void {
-    this.employeer.postType(this.userForm.value).subscribe({
+    this.employeer.postValue(this.userForm.value).subscribe({
       next: (data) =>{
-        console.log("data: ",data[0].type_personal)
-        switch (data[0].type_personal) {
+        if (data[0].estado != undefined) {
+          if (data[0].estado == '1') {
+            this.employeer.setUsuario(data);
+          }else{
+            this.router.navigate(['/']);
+          }
+        }else{
+          this.router.navigate(['/']);             
+        }
+        switch (data[0].rol) {
           case 'caj':
             this.router.navigate(['/cajero']);
             break;
@@ -65,9 +73,12 @@ export class InicioComponent implements OnInit{
             this.router.navigate(['/']);
             break;
         }
+        //console.log(this.employeer.getUsuario()[0].usuario)
       },
       error: (e) =>{
         console.log(e)
+        this.router.navigate(['/']);
+            
       }
     })
   }

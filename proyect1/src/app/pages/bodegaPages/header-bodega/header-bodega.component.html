@@ -6,12 +6,12 @@
           href="/"
           class="d-flex align-items-center mb-3 mb-md-0 me-md-3 text-white text-decoration-none"
         >
-          <span class="fs-3">Bodega</span>
+          <span class="fs-3">Bodega: {{ (usuario[0]) ? usuario[0].subcursal : "" }}</span>
         </a>
         <a
             class="d-flex align-items-center mb-3 mb-md-0 me-md-3 text-white text-decoration-none"
         >
-            <span class="fst-italic fs-5">{{ usuario }}</span>
+            <span class="fst-italic fs-5">{{ (usuario[0]) ? usuario[0].usuario : "" }}</span>
         </a>
         <hr />
         <ul class="nav nav-pills flex-column mb-auto">
@@ -33,7 +33,7 @@
           </li>
         </ul>
         <hr/>
-        <button type="button" class="btn btn-danger">Cerrar Session</button>
+        <button type="button" class="btn btn-danger" (click)="cerrarSesion()">Cerrar Session</button>
       </div>
       <div class="b-example-divider b-example-vr"></div>
 

@@ -16,4 +16,16 @@ module.exports = (app) => {
         }
       });
 
+          // select VIEW usuario.cliente_card
+    app.get('/api/admin/viewEmployees', async (req, res) => {
+      try {
+          console.log("employees");
+          // no requiere ningun valor
+          const result = await dbConnect.connect().query('SELECT * FROM personal.view_employees');
+          res.json(result.rows);
+      } catch (err) {
+        res.status(500).send(err.message);
+      }
+    });
+
 }

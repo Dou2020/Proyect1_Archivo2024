@@ -14,10 +14,11 @@
   <body>
     <main class="d-flex flex-nowrap">
       <!-- Header en bodega Opciones de ver y ingresar producto -->
-      <app-header-bodega seleccionar="1" usuario={{usuario.user}} ></app-header-bodega>
+      <app-header-bodega seleccionar="1" [usuario]="(usuario.length==1)? usuario : []"></app-header-bodega>
+
       
       <div class="b-example-divider b-example-vr"></div>
-      <app-view-product></app-view-product>
+      <app-view-product [subcursal]=" (usuario.length == 1)? usuario[0].subcursal : '' " ></app-view-product>
     </main>
   <!-- Script de boostrap -->
   <script

@@ -28,4 +28,15 @@ module.exports = (app) => {
           res.status(500).send(err.message);
         }
     });
+
+    app.post('/api/empleado/value', async (req, res) => {
+      try {
+        const {usuario, pass} = req.body;
+        console.log(usuario+" "+pass)
+        const result = await dbConnect.connect().query('SELECT * FROM personal.value_personal($1,$2)',[ usuario , pass ]);
+        res.json(result.rows);
+      } catch (err) {
+        res.status(500).send(err.message);
+      }
+  });
 }

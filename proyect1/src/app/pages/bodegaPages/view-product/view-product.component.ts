@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ViewProductService } from "./../../../services/bodega/view-product.service";
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -14,13 +14,15 @@ import { RouterLink } from '@angular/router';
 })
 export class ViewProductComponent implements OnInit{
   
+  @Input() subcursal: string = "";
+  
   // variables globales
   products: any[] = [];
 
   constructor(private producto:ViewProductService){    }
 
   ngOnInit(): void {
-    this.getProduct("CENTRO1")    
+    this.getProduct(this.subcursal)    
   }
 
   // obtiene el listado de producto no igresado a la bodega

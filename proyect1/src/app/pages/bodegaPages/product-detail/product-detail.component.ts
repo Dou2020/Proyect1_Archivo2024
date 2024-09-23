@@ -10,7 +10,7 @@ import {MatButtonModule} from '@angular/material/button';
 
 import { HeaderBodegaComponent } from "../header-bodega/header-bodega.component";
 import { AddProductComponent } from '../add-product/add-product.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeerService } from '../../../services/employeer.service';
 
 @Component({
@@ -34,14 +34,18 @@ import { EmployeerService } from '../../../services/employeer.service';
 export class ProductDetailComponent implements OnInit {
 
   codProduct: string = "";
-  user: {usuario:string} = {usuario:""};
+  usuario: any[] = [];
 
-  constructor(private route: ActivatedRoute, private employeer: EmployeerService){
+  constructor(private router: Router ,private route: ActivatedRoute, private employeer: EmployeerService){
     this.codProduct = route.snapshot.params['codProduct'];
-    this.user = employeer.getUsuario();
+
+    this.usuario = employeer.getUsuario();
   }
 
   ngOnInit(): void {
+    if (this.usuario.length != 1 ) {
+      this.router.navigate(['/']);
+    }
   }
 
 }

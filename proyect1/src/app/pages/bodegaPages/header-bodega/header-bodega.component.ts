@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { EmployeerService } from '../../../services/employeer.service';
 
 @Component({
   selector: 'app-header-bodega',
@@ -16,11 +17,10 @@ export class HeaderBodegaComponent implements OnInit {
   classProduct: string[] = this.select;
   classAddProduct: string[] = this.comun;
 
-  @Input()
-  usuario: string = ''
+  constructor(private router:Router, private employee: EmployeerService){}
 
-  @Input()
-  seleccionar: string = "";
+  @Input() usuario: any[] = [];
+  @Input() seleccionar: string = "";
 
   ngOnInit(): void {
     switch (this.seleccionar) {
@@ -38,6 +38,12 @@ export class HeaderBodegaComponent implements OnInit {
         this.classAddProduct= this.comun;
         break;
     }
+  }
+
+  cerrarSesion(){
+    console.log("cerrarSesion")
+    this.employee.setUsuario([]);
+    this.router.navigate(['/']);
   }
 
 }
