@@ -13,14 +13,10 @@
   </head>
   <body>
     <main class="d-flex flex-nowrap">
-        <!-- Header de Admin -->
-        <app-header-admin categoria="2" [usuario]="(usuario.length==1)? usuario: []"></app-header-admin>
-
-        <div class="b-example-divider b-example-vr"></div>
-
-        <!-- Insertar usuario of the user -->
-         <app-create-empleado usuario={{employeer}} ></app-create-empleado>
-        
+      <!-- Header en bodega Opciones de ver y ingresar producto -->
+        <app-header-admin categoria="4" [usuario]=" (usuario.length==1)? usuario:[] "></app-header-admin>
+      <div class="b-example-divider b-example-vr"></div>
+      <app-insert-cart></app-insert-cart> 
     </main>
     <!-- Script de boostrap -->
     <script

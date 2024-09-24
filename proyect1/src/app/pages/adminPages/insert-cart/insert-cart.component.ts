@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ClienteCardService} from './../../../services/admin/cliente-card.service';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-insert-cart',
@@ -14,7 +16,7 @@ export class InsertCartComponent implements OnInit {
   clientCards: any[] = [] ;
   myClasses = ['btn','btn-warning'];
 
-  constructor(private clienteCard: ClienteCardService){}
+  constructor(private clienteCard: ClienteCardService,private router:Router){}
 
   ngOnInit(): void {
       this.getData();
@@ -23,19 +25,37 @@ export class InsertCartComponent implements OnInit {
   getData(){
     this.clienteCard.getClientCard().subscribe({
       next: (value) => {
-          console.log(value);
+          //console.log(value);
           this.clientCards = value;
       },error: (err) =>  {
           console.log(err);
       }
     })
   }
-  postUpdate(){
-    console.log("cambio de tarjeta")
+
+  postUpdateCard(tarjeta:string):void{
+    console.log("cambio de tarjeta "+tarjeta)
+
+    const tarj = new FormGroup({
+      card: new FormControl(tarjeta)
+    });
+
+    this.clienteCard.postUpdateTypeCard(tarj.value).subscribe({
+      next: (value) => {
+        console.log(value)
+        this.getData();
+      },error: (err) => {
+        console.log(err);
+      }
+    })
+  }
+
+  postInsertCard(){
+
   }
 
   tipoButton(tipo:string): string[]{
-    console.log(tipo);
+    //console.log(tipo);
     switch (tipo) {
       case "SOLICITAR ORO":
         return ["btn","btn-warning","w-100"];
@@ -46,7 +66,7 @@ export class InsertCartComponent implements OnInit {
       case "MAXIMO":
         return ["btn","btn-success","w-100","disabled"]
         case "S/T":
-          return ["btn","btn-primary","w-100"]
+          return ["btn","btn-primary","w-100","disabled"]
     
       default:
        return ["btn","btn-secondary","w-100","disabled"];

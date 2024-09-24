@@ -4,8 +4,13 @@
 >
   <div class="d-flex flex-column">
     <div class="table-responsive">
-    <table class="table table-secondary table-hover caption-top" style="width: 60vw;">
-        <caption>Listado Cliente-Tarjeta</caption>
+      <table
+        class="table table-secondary table-hover caption-top"
+        style="width: 60vw"
+      >
+        <caption>
+          Listado Cliente-Tarjeta
+        </caption>
         <thead>
           <tr>
             <th scope="col">No.</th>
@@ -17,23 +22,46 @@
           </tr>
         </thead>
         <tbody>
-            @for (clientCard of clientCards; track $index) {
-                <tr>
-                        <th scope="row">{{clientCard.no_card}}</th>
-                        <td>{{clientCard.nombre}}</td>
-                        <td>{{clientCard.type_card}}</td>
-                        <td>{{clientCard.puntos}}</td>
-                        <td>{{clientCard.acumulado}}</td>
-                        <td>
-                            <button type="button" [class]="tipoButton(clientCard.subir)" (click)="postUpdate()">
-                                {{clientCard.subir}}
-                            </button>
-                        </td>
-                </tr>
-            }
+          @for (clientCard of clientCards; track $index) {
+          <tr>
+            <th scope="row">{{ clientCard.no_card }}</th>
+            <td>{{ clientCard.nombre }}</td>
+            <td>{{ clientCard.type_card }}</td>
+            <td>{{ clientCard.puntos }}</td>
+            <td>{{ clientCard.acumulado }}</td>
+            <td>
+              <button
+                type="button"
+                [class]="tipoButton(clientCard.subir)"
+                (click)="postUpdateCard(clientCard.no_card)"
+              >
+                {{ clientCard.subir }}
+              </button>
+ 
+            </td>
+          </tr>
+          }
         </tbody>
       </table>
-    </div>
-    
-  </div>
-</div>
+
+
+<script>
+  const exampleModal = document.getElementById("exampleModal");
+  if (exampleModal) {
+    exampleModal.addEventListener("show.bs.modal", (event) => {
+      // Button that triggered the modal
+      const button = event.relatedTarget;
+      // Extract info from data-bs-* attributes
+      const recipient = button.getAttribute("data-bs-whatever");
+      // If necessary, you could initiate an Ajax request here
+      // and then do the updating in a callback.
+
+      // Update the modal's content.
+      const modalTitle = exampleModal.querySelector(".modal-title");
+      const modalBodyInput = exampleModal.querySelector(".modal-body input");
+
+      modalTitle.textContent = `New message to ${recipient}`;
+      modalBodyInput.value = recipient;
+    });
+  }
+</script>

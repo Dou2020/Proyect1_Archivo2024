@@ -1,36 +1,38 @@
 <div class="flex justify-content-center align-content-center flex-wrap" style=" min-height: 60%; min-width: 800px;">
   <div class="flex align-items-center justify-content-center">
       <form
+        #f="ngForm" 
         class="example-form "
+        (ngSubmit)="onSubmit(f)"
       >
       <h1>Ingresar Empleado</h1>
         <mat-form-field class="example-full-width">
           <mat-label>Usuario</mat-label>
-          <input matInput placeholder="Ex. CAJERO1" />
+          <input matInput placeholder="Ex. CAJERO1" name="usuario" readonly="{{(employeer.length==1)? true:false}}" ngModel="{{employeer[0]?.usuario}}" />
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <mat-label>Nombre</mat-label>
-          <input matInput placeholder="Ex. Alejandro" />
+          <input matInput placeholder="Ex. Alejandro" name="nombre" ngModel="{{employeer[0]?.name}}"  />
         </mat-form-field>
         <mat-form-field style="width: 100%">
           <mat-label>Select Rol</mat-label>
-          <mat-select>
-            <mat-option value="caj">CAJERO</mat-option>
-            <mat-option value="bod">BODEGA</mat-option>
-            <mat-option value="inv">INVENTARIO</mat-option>
-          </mat-select>
+            <mat-select name="rol" disabled="{{(employeer.length==1)? true:false}}" ngModel="{{employeer[0]?.rol}}">
+              <mat-option value="caj" >CAJERO</mat-option>
+              <mat-option value="bod">BODEGA</mat-option>
+              <mat-option value="inv">INVENTARIO</mat-option>
+            </mat-select>
         </mat-form-field>
         <mat-form-field style="width: 100%">
           <mat-label>Select Subcursal</mat-label>
-          <mat-select>
-            <mat-option value="PARQUE">PARQUE</mat-option>
-            <mat-option value="CENTRO1">CENTRO 1</mat-option>
-            <mat-option value="CENTRO2">CENTRO 2</mat-option>
-          </mat-select>
+            <mat-select name="subcursal" disabled="{{(employeer.length==1)? true:false}}" ngModel="{{employeer[0]?.subcursal}}" >
+              <mat-option value="PARQUE">PARQUE</mat-option>
+              <mat-option value="CENTRO1">CENTRO 1</mat-option>
+              <mat-option value="CENTRO2">CENTRO 2</mat-option>
+            </mat-select>
         </mat-form-field>
         <mat-form-field class=" example-full-width ">
           <mat-label>Enter your password</mat-label>
-          <input matInput [type]="hide() ? 'password' : 'text'" />
+          <input matInput [type]="hide() ? 'password' : 'text'" name="pass" ngModel />
           <button
             mat-icon-button
             matSuffix

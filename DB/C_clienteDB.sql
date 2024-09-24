@@ -1,6 +1,7 @@
+DROP VIEW usuario.cliente_card;
 -- Join Para ejecucion -- 
 CREATE VIEW usuario.cliente_card AS
-SELECT COALESCE(c.no_card,'S/T') AS no_card ,c.nombre,
+SELECT COALESCE(c.no_card,'S/T') AS no_card ,c.nit ,c.nombre ,
 CASE
   WHEN t.tipo = 'C' THEN 'COMUN'
   WHEN t.tipo = 'O' THEN 'ORO'
@@ -52,8 +53,10 @@ SELECT * FROM usuario.cliente_card;
 -- values n_card and nit --  
 SELECT usuario.insert_card('1238','5264137895');
 -- values n_card and nit --
-SELECT usuario.insert_card('1239','5264137895');
+SELECT usuario.insert_card('1241','5264137896');
 -- values n_card and cantidad_puntos a cajear --
 SELECT usuario.update_puntos_canjeado('1234',5);
 -- values n_card and total_acumular -- 
-SELECT usuario.update_acumular_card('1238',1100);
+SELECT usuario.update_acumular_card('1240',12000);
+-- update data of the card --
+CALL usuario.update_tipo_card('1240');

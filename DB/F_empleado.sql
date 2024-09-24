@@ -32,6 +32,39 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql
 
+DROP PROCEDURE personal.update_employee;
+CREATE OR REPLACE PROCEDURE personal.update_employee(usu VARCHAR, nombre VARCHAR, pass VARCHAR)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    UPDATE personal.empleado 
+    SET name = nombre, password= pass
+    WHERE usuario = usu;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE NOTICE 'ERROR, REVERTIR TODOS LOS CAMBIOS';
+        ROLLBACK;
+END; 
+$$;
+CALL personal.insert_employee('bodeg5','Eduar','bod','CENTRO1','1234');
+
+CREATE OR REPLACE PROCEDURE personal.insert_employee(usu VARCHAR,nombre VARCHAR, r VARCHAR, sub VARCHAR, pass VARCHAR )
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    INSERT INTO personal.empleado(usuario,password,name,rol,subcursal,estado)
+    VALUES(usu, pass, nombre ,r ,sub, '1');
+
+    RAISE NOTICE 'Empleado % insertado correctamente.', usu;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE NOTICE 'ERROR, REGISTRAR EMPLEADO PRODUCE personal.update_status_employee';
+        ROLLBACK;
+END; 
+$$;
+
 DROP VIEW personal.view_employees;
 
 -- Crear una vista de empleados --
@@ -47,3 +80,6 @@ SELECT * FROM personal.view_employees
 SELECT personal.exist_personal('caj1','12345');
 SELECT personal.type_personal('caj1','1234');
 SELECT * FROM personal.value_personal('caj1','1234');
+
+--modificando en usuario nombre y password--
+CALL personal.update_employee('bodeg2','Dou','1234');

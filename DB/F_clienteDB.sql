@@ -29,6 +29,40 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql
 
+
+-- Actualizar el tipo de tarjeta usuario si se puede
+CREATE OR REPLACE PROCEDURE usuario.update_tipo_card(card VARCHAR)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+  t_card VARCHAR;
+BEGIN
+    SELECT
+    CASE
+      WHEN tipo = 'C' THEN 'O' -- CAMBIAR DE COMUN A ORO --
+      WHEN tipo = 'O' THEN 'P'
+      WHEN tipo = 'P' THEN 'D'
+      ELSE NULL
+    END INTO t_card 
+    FROM usuario.tarjeta 
+    WHERE no_card = card;
+
+    -- Verificar si se obtuvo un resultado --
+    IF t_card IS NULL THEN
+        RAISE EXCEPTION 'tarjeta no encontrado';
+    END IF;
+    
+    UPDATE usuario.tarjeta
+    SET tipo = t_card
+    WHERE no_card = card;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE NOTICE 'ERROR, REVERTIR TODOS LOS CAMBIOS';
+        ROLLBACK;
+END; 
+$$;
+
 -- UPDATE ACUMULAR, PUNTOS EN TAJETA --
 CREATE OR REPLACE FUNCTION usuario.update_acumular_card(card VARCHAR,cantidad DECIMAL)
 RETURNS void AS $$
@@ -84,8 +118,11 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+SELECT usuario.update_tipo_card2("1234");
+
+DROP FUNCTION usuario.update_tipo_card;
 -- UPDATE TIPO DE TARJETA -- 
-CREATE OR REPLACE FUNCTION usuario.update_tipo_card(card VARCHAR)
+CREATE OR REPLACE FUNCTION usuario.update_tipo_card2(card VARCHAR)
 RETURNS void AS $$
 DECLARE
   t_card VARCHAR;
@@ -115,11 +152,13 @@ $$ LANGUAGE plpgsql;
 *   se tiene que resetiar la cantidad acumulada
 *   CREAR FUNCION PARA EL TRIGGER
 */
+
+DROP FUNCTION usuario.ajustar_acumulado();
 CREATE OR REPLACE FUNCTION usuario.ajustar_acumulado()
 RETURNS TRIGGER AS $$
 BEGIN
     -- Si la cantidad es mayor a 100, aplicar un descuento
-    IF NEW.tipo == OLD.tipo THEN
+    IF NEW.tipo = OLD.tipo THEN
         RAISE EXCEPTION 'El tipo de tarjeta es el mismo %', NEW.tipo;
     END IF;
     CASE NEW.tipo
@@ -151,9 +190,12 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+DROP TRIGGER ajustar_acumulado_cliente ON usuario.tarjeta;
+
 -- CREAR EL TRIGGER PARA usuario.tarjeta
 CREATE TRIGGER ajustar_acumulado_cliente
 BEFORE UPDATE ON usuario.tarjeta
 FOR EACH ROW
+WHEN (OLD.tipo IS DISTINCT FROM NEW.tipo)
 EXECUTE FUNCTION usuario.ajustar_acumulado();
 
