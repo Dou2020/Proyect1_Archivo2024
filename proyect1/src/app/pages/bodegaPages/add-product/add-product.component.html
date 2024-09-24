@@ -13,15 +13,15 @@
         <input
           matInput
           name="cod"
-          readonly="{{ ( producto[0] )? true: false }}"
+          readonly="{{ (producto[0].cod_producto)? true: false }}"
           placeholder="Ex. producto"
           ngModel="{{ producto[0]?.cod_producto }}"
           [formControl]="codFormControl"
         />
+        @if (codFormControl.hasError('required')) {
+          <mat-error>Codigo is <strong>required</strong></mat-error>
+        }
       </mat-form-field>
-      @if (codFormControl.hasError('required')) {
-        <mat-error>Usuario is <strong>required</strong></mat-error>
-      }
       <mat-form-field class="example-full-width">
         <mat-label>Nombre</mat-label>
         <input
@@ -31,10 +31,10 @@
           ngModel="{{ producto[0]?.name }}"
           [formControl]="nameFormControl"
         />
+        @if (nameFormControl.hasError('required')) {
+          <mat-error>Nombre is <strong>required</strong></mat-error>
+        }
       </mat-form-field>
-      @if (nameFormControl.hasError('required')) {
-        <mat-error>Usuario is <strong>required</strong></mat-error>
-      }
       <!-- Ingresar Precio del producto -->
       <mat-form-field class="example-full-width" floatLabel="always">
         <mat-label>Precio</mat-label>
@@ -45,7 +45,11 @@
           class="example-right-align"
           placeholder="0"
           ngModel="{{ producto[0]?.precio }}"
+          [formControl]="precioFormControl"
         />
+        @if (precioFormControl.hasError('required')) {
+          <mat-error>Precio is <strong>required</strong></mat-error>
+        }
         <span matTextPrefix>Q&nbsp;</span>
         <!-- <span matTextSuffix>.00</span> -->
       </mat-form-field>
@@ -59,7 +63,11 @@
           class="example-right-align"
           placeholder="0"
           ngModel="{{ producto[0]?.cantidad }}"
+          [formControl]="cantidadFormControl"
         />
+        @if (cantidadFormControl.hasError('required')) {
+          <mat-error>Cantidad is <strong>required</strong></mat-error>
+        }
       </mat-form-field>
       <!-- Ingreso de subcursal desabilitado -->
       <mat-form-field class="example-full-width">
@@ -69,7 +77,7 @@
       <div class="overflow-hidden">
         <div class="flex justify-content-center">
           <!-- actualiza el script del botton -->
-          <button mat-flat-button style="width: 100%">
+          <button mat-flat-button style="width: 100%" >
             {{
               producto.length == 1 ? "Actualizar Producto" : "Ingresar Producto"
             }}

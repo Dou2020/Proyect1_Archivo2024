@@ -36,6 +36,8 @@ export class AddProductComponent implements OnInit{
   // form validate
   codFormControl = new FormControl('', [Validators.required]);
   nameFormControl = new FormControl('', [Validators.required]);
+  precioFormControl = new FormControl('', [Validators.required]);
+  cantidadFormControl = new FormControl('', [Validators.required]);
   
   producto: any[] = [{cantidad:""}];
 
