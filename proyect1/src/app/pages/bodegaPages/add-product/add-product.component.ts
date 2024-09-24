@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, signal } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import {FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators} from '@angular/forms';
 
 import {AsyncPipe} from '@angular/common';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -24,11 +24,18 @@ import { Router } from '@angular/router';
     MatIconModule,
     MatButtonModule,
     HeaderBodegaComponent,
+    ReactiveFormsModule,
+    FormsModule
+    
   ],
   templateUrl: './add-product.component.html',
   styleUrl: './add-product.component.css'
 })
 export class AddProductComponent implements OnInit{
+
+  // form validate
+  codFormControl = new FormControl('', [Validators.required]);
+  nameFormControl = new FormControl('', [Validators.required]);
   
   producto: any[] = [{cantidad:""}];
 
@@ -66,6 +73,11 @@ export class AddProductComponent implements OnInit{
 
   clickBotton(){
     this.router.navigate(['/bodega'])
+  }
+  
+  onSubmit(f: NgForm) {
+    console.log(f.value); // { first: '', last: '' }
+    console.log(f.valid); // false
   }
 
 }

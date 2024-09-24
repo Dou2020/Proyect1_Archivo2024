@@ -65,7 +65,19 @@ module.exports = (app) => {
               res.status(500).send(err.message);
               }
           });
-      
+
+          // select usuario.cliente_card
+          app.post('/api/admin/insertEmployee', async (req, res) => {
+            try {
+              const {usuario,nombre,subcursal,rol, pass} = req.body || null;
+              console.log("Insert Employee "+usuario);
+              // no requiere ningun valor
+              const result = await dbConnect.connect().query('CALL personal.insert_employee($1,$2,$3,$4,$5)',[usuario,nombre,rol,subcursal,pass]);
+              res.json(result.rows);
+              } catch (err) {
+              res.status(500).send(err.message);
+              }
+          });          
 
 
 }

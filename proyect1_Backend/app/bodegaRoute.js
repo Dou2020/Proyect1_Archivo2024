@@ -32,7 +32,7 @@ module.exports = (app) => {
             // requiere producto insert (subcursal)
           const {sub,cod} = req.body || null;
           console.log(sub+" "+cod);
-          const result = await dbConnect.connect().query('SELECT * FROM almacen.product_bodega WHERE subcursal=$1 AND cod_producto=$2',[ sub, cod ]);
+          const result = await dbConnect.connect().query('SELECT * FROM almacen.product_bodega WHERE (subcursal=$1 AND cod_producto=$2) OR (cod_producto=$2 AND subcursal=$3)',[ sub, cod,'N/A' ]);
           res.json(result.rows);
         } catch (err) {
           res.status(500).send(err.message);
