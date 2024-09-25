@@ -6,6 +6,7 @@ const cors = require('cors');
 const employeer = require('./employeerRoute');
 const admin = require('./adminRoute');
 const bodega = require('./bodegaRoute');
+const client = require('./clientRoute');
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 employeer(app);
 admin(app);
 bodega(app);
+client(app);
 
 
 
