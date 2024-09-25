@@ -8,25 +8,23 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import { HeaderBodegaComponent } from '../header-bodega/header-bodega.component';
 import { ViewProductService } from '../../../services/bodega/view-product.service';
 import { Router } from '@angular/router';
+import { InsertProductService } from '../../../services/bodega/insert-product.service';
 
 @Component({
   selector: 'app-add-product',
   standalone: true,
   imports: [
-    AsyncPipe,
-    MatAutocompleteModule,
-    MatInputModule,
+    FormsModule,
     MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    AsyncPipe,
     MatSelectModule,
     MatIconModule,
     MatButtonModule,
-    HeaderBodegaComponent,
-    ReactiveFormsModule,
-    FormsModule
-    
   ],
   templateUrl: './add-product.component.html',
   styleUrl: './add-product.component.css'
@@ -39,15 +37,15 @@ export class AddProductComponent implements OnInit{
   precioFormControl = new FormControl('', [Validators.required]);
   cantidadFormControl = new FormControl('', [Validators.required]);
   
-  producto: any[] = [{cantidad:""}];
+  producto: any[] = [];
 
   // Input of form update 
   @Input() codigo: string = "";
   @Input() subcursal: string="";
 
-  constructor(private product:ViewProductService, private router: Router){}
+  constructor(private product:ViewProductService, private router: Router, private productInsert: InsertProductService){}
 
-  ngOnInit(): void { 
+  ngOnInit() { 
     //console.log(this.codigo)
     if (this.codigo !== "") {
       const userForm: any = new FormGroup({
@@ -57,8 +55,8 @@ export class AddProductComponent implements OnInit{
   
       this.product.postProductDetail( userForm.value ).subscribe({
         next:(value) =>{
-          console.log(value)
           this.producto = value;
+          console.log(this.producto)
         },error(err){
           console.log(err)
         }
@@ -80,6 +78,14 @@ export class AddProductComponent implements OnInit{
   onSubmit(f: NgForm) {
     console.log(f.value); // { first: '', last: '' }
     console.log(f.valid); // false
+    this.productInsert.insertProductPost(f.value).subscribe({
+      next:(value)=>{
+        console.log("Insert Product")
+        this.router.navigate(['/bodega'])
+      },error:(err) =>{
+        console.log(err);
+      }
+    })
   }
 
 }

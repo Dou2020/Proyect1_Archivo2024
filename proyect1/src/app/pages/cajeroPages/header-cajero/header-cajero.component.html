@@ -1,0 +1,30 @@
+<div
+class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark"
+style="width: 280px; height: 100vh;"
+>
+<a
+  href="/"
+  class="d-flex align-items-center mb-3 mb-md-0 me-md-3 text-white text-decoration-none"
+>
+  <span class="fs-3">Cajero: {{ (usuario[0]) ? usuario[0].subcursal : "" }}</span>
+</a>
+<a
+    class="d-flex align-items-center mb-3 mb-md-0 me-md-3 text-white text-decoration-none"
+>
+    <span class="fst-italic fs-5">{{ (usuario[0]) ? usuario[0].usuario : "" }}</span>
+</a>
+<hr />
+<ul class="nav nav-pills flex-column mb-auto">
+  <li class="nav-item">
+    <a [class]="classFactura" routerLink="/cajero">
+      <svg class="bi pe-none me-2" width="16" height="16">
+        <use xlink:href="#home" />
+      </svg>
+      Factura
+    </a>
+  </li>
+</ul>
+<hr/>
+<button type="button" class="btn btn-danger" (click)="cerrarSesion()">Cerrar Session</button>
+</div>
+<div class="b-example-divider b-example-vr"></div>

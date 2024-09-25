@@ -17,7 +17,7 @@ export class ViewProductService {
     return this.http.post<any[]>(this.apiUrl,sub);
   }
 
-  postProductDetail(value:any[]){
+  postProductDetail(value:any){
     return this.http.post<any[]>(this.apiUrlSelect,value);
   }
 }

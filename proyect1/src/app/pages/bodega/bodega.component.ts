@@ -19,7 +19,7 @@ export class BodegaComponent implements OnInit {
 
     constructor(private employee:EmployeerService, private router: Router){
       this.usuario = employee.getUsuario();
-      console.log("component: ")
+      //console.log("component: ")
       //console.log(this.usuario)
 
     }

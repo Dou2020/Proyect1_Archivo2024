@@ -15,11 +15,11 @@ export const routes: Routes = [
 
     // Route of the Administrador
     {path:'admin',component:AdminComponent},
-    {path: 'admin/viewUsers',component: AdminComponent},
+    {path:'admin/viewUsers',component: AdminComponent},
     {path:'admin/addUser',component:CreateEmpleadoComponent},
     {path:'admin/viewCard',component:ViewCardsComponent},
-    {path: 'admin/insertUser',component:ViewUserComponent},  // form of the insert Employee
-    {path: 'admin/updateUser/:usuario',component:ViewUserComponent}, // form of the update Employee
+    {path:'admin/insertUser',component:ViewUserComponent},  // form of the insert Employee
+    {path:'admin/updateUser/:usuario',component:ViewUserComponent}, // form of the update Employee
 
     // Route of the bodega
     {path:'bodega',component:BodegaComponent},

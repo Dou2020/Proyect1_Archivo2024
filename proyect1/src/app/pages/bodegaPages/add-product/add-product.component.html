@@ -4,19 +4,20 @@
 >
   <div class="flex align-items-center justify-content-center">
     <form 
-      #product="ngForm" 
+      #f="ngForm" 
       class="example-form" 
-      (ngSubmit)="onSubmit(product)">
+      (ngSubmit)="onSubmit(f)"
+    >
       <h1>Ingresar Producto</h1>
       <mat-form-field class="example-full-width">
         <mat-label>Código del Producto</mat-label>
         <input
           matInput
-          name="cod"
-          readonly="{{ (producto[0].cod_producto)? true: false }}"
+          name="codigo"
+          readonly="{{ (producto.length == 1)? true: false }}"
           placeholder="Ex. producto"
           ngModel="{{ producto[0]?.cod_producto }}"
-          [formControl]="codFormControl"
+          
         />
         @if (codFormControl.hasError('required')) {
           <mat-error>Codigo is <strong>required</strong></mat-error>
@@ -29,7 +30,7 @@
           name="nombre"
           placeholder="Ex. Alejandro"
           ngModel="{{ producto[0]?.name }}"
-          [formControl]="nameFormControl"
+          
         />
         @if (nameFormControl.hasError('required')) {
           <mat-error>Nombre is <strong>required</strong></mat-error>
@@ -45,7 +46,7 @@
           class="example-right-align"
           placeholder="0"
           ngModel="{{ producto[0]?.precio }}"
-          [formControl]="precioFormControl"
+          
         />
         @if (precioFormControl.hasError('required')) {
           <mat-error>Precio is <strong>required</strong></mat-error>
@@ -62,8 +63,8 @@
           name="cantidad"
           class="example-right-align"
           placeholder="0"
-          ngModel="{{ producto[0]?.cantidad }}"
-          [formControl]="cantidadFormControl"
+          
+          ngModel="{{ (producto.length==1)? producto[0]?.cantidad : 0 }}"
         />
         @if (cantidadFormControl.hasError('required')) {
           <mat-error>Cantidad is <strong>required</strong></mat-error>
@@ -79,7 +80,7 @@
           <!-- actualiza el script del botton -->
           <button mat-flat-button style="width: 100%" >
             {{
-              producto.length == 1 ? "Actualizar Producto" : "Ingresar Producto"
+              (producto[0]?.cod_producto) ? "Actualizar Producto" : "Ingresar Producto"
             }}
           </button>
         </div>
