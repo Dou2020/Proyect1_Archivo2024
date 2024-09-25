@@ -12,11 +12,7 @@
           placeholder="Ex. 1564"
           name="no_factura"
           ngModel
-          [formControl]="noFormControl"
         />
-        @if (noFormControl.hasError('required')) {
-        <mat-error>No of Factura is <strong>required</strong></mat-error>
-        }
       </mat-form-field>
       <mat-form-field>
         <mat-label>Nit</mat-label>
@@ -56,7 +52,7 @@
         />
       </mat-form-field>
 
-      <mat-form-field class="example-full-width" floatLabel="always">
+      <mat-form-field floatLabel="always">
         {{usuario[0]?.puntos}}
         <mat-label>Cantidad de Descuento</mat-label>
         <input
@@ -68,7 +64,7 @@
           value=0
           ngModel
         />
-        <span matTextPrefix>Puntos&nbsp;</span>
+        <span matTextPrefix>Puntos-&nbsp;</span>
         <!-- <span matTextSuffix>.00</span> -->
       </mat-form-field>
 

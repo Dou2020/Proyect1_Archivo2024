@@ -28,7 +28,7 @@ BEGIN
 
 EXCEPTION
     WHEN OTHERS THEN
-        RAISE NOTICE 'ERROR, REVERTIR TODOS LOS CAMBIOS';
+        RAISE NOTICE 'ERROR, INSERT FACTURA';
         ROLLBACK;
 END; 
 $$;
@@ -41,6 +41,8 @@ ARRAY[
     '{ "cod_producto":"P4","cantidad":3 }'::JSONB
     ]
 );
+
+
 SELECT * FROM contador.producto_vendido WHERE no_factura='001';
 
 SELECT * FROM contador.factura;
