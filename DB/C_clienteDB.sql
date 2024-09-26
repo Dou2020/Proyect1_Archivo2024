@@ -57,6 +57,6 @@ SELECT usuario.insert_card('1241','5264137896');
 -- values n_card and cantidad_puntos a cajear --
 SELECT usuario.update_puntos_canjeado('1234',5);
 -- values n_card and total_acumular -- 
-SELECT usuario.update_acumular_card('1240',12000);
+SELECT usuario.update_acumular_card('1240',12000.7900);
 -- update data of the card --
 CALL usuario.update_tipo_card('1240');

@@ -127,13 +127,7 @@ CREATE TABLE almacen.bodega(
   FOREIGN KEY (cod_producto) REFERENCES almacen.producto(cod_producto),
   FOREIGN KEY (subCursal) REFERENCES shop.subCursal(nombre)
 );
-
-SELECT * FROM almacen.producto FULL 
-JOIN almacen.bodega 
-ON almacen.producto.cod_producto = almacen.bodega.cod_producto 
-WHERE almacen.bodega.cod_producto = 'prod200' 
-AND almacen.bodega.subcursal = 'CENTRAL'; 
--- regitro de producto a la bodega SUBCURSAL SUR,CENTRAL,NORTE -- p
+ 
 -- registro de estante --
 CREATE TABLE almacen.estante(
   subCursal VARCHAR(20) NOT NULL,

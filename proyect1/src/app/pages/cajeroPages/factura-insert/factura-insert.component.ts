@@ -12,6 +12,7 @@ import { ViewProductService } from '../../../services/bodega/view-product.servic
 import { ViewClientService } from '../../../services/cajero/view-client.service';
 
 import {MatTableModule} from '@angular/material/table';
+import { InsertFacturaService } from '../../../services/cajero/insert-factura.service';
 
 @Component({
   selector: 'app-factura-insert',
@@ -41,15 +42,17 @@ export class FacturaInsertComponent implements OnInit {
   productos: any[] = [];
   addProducts: any[] = [];
   factura: any = {};
+  productFac: any[] = [];
 
   @Input() cajero: any[]=[];
 
-  constructor(private router: Router, private products:ViewProductService, private client: ViewClientService){}
+  constructor(private router: Router, private products:ViewProductService, private client: ViewClientService, private fact: InsertFacturaService){}
 
   ngOnInit(): void {
     this.getProducts();
   }
 
+  // search client
   getCLient(F:NgForm){
     console.log("get Client")
     console.log(F.value)
@@ -78,23 +81,49 @@ export class FacturaInsertComponent implements OnInit {
     })
   }
 
+  getProductsFac(){
+    this.fact.viewProductFacPost({no_factura: this.factura?.no_factura}).subscribe({
+      next:(value) =>{
+        this.productFac = value;
+      }, error:(err) =>{
+        console.log(err);
+      }
+    })
+  }
+
+
   onSubmit(f: NgForm) {
   
     console.log(f.value); // { first: '', last: '' 
-    this.factura = f.value;
-  
+    
+    this.fact.insertFacturaPost(f.value).subscribe({
+      next:(value)=>{
+        console.log("Agregado factura")
+        this.factura = f.value;
+      },error:(err)=>{
+        console.log(err);
+      }
+    })
   }
 
   addProduct(f:NgForm){
-    //console.log(f.value)
-    //console.log(this.factura)
-    const final = {
-      no_factura: this.factura.no_factura,
-      ...f.value
-    }
-
-    console.log(final);
     
+    if (this.factura.no_factura) {
+      
+      const final = {
+        no_factura: this.factura.no_factura,
+        ...f.value
+      }
+      console.log(final);
+
+      this.fact.insertProductFacPost(final).subscribe({
+        next:(value)=>{
+          this.getProductsFac();
+        },error:(err)=>{
+          console.log(err)
+        }
+      })
+    }
   }
 
 }

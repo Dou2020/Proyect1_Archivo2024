@@ -8,14 +8,14 @@
       <h1>Ingresar Empleado</h1>
         <mat-form-field class="example-full-width">
           <mat-label>Usuario</mat-label>
-          <input matInput placeholder="Ex. CAJERO1" name="usuario" readonly="{{(employeer.length==1)? true:false}}" ngModel="{{employeer[0]?.usuario}}" [formControl]="userFormControl" />
+          <input matInput placeholder="Ex. CAJERO1" name="usuario" readonly="{{(employeer.length==1)? true:false}}" ngModel="{{employeer[0]?.usuario}}"/>
           @if (userFormControl.hasError('required')) {
             <mat-error>Usuario is <strong>required</strong></mat-error>
           }
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <mat-label>Nombre</mat-label>
-          <input matInput placeholder="Ex. Alejandro" name="nombre" ngModel="{{employeer[0]?.name}}" [formControl]="nameFormControl"  />
+          <input matInput placeholder="Ex. Alejandro" name="nombre" ngModel="{{employeer[0]?.name}}" />
           @if (nameFormControl.hasError('required')) {
             <mat-error>Usuario is <strong>required</strong></mat-error>
           }
@@ -38,7 +38,7 @@
         </mat-form-field>
         <mat-form-field class=" example-full-width ">
           <mat-label>Enter your password</mat-label>
-          <input matInput [type]="hide() ? 'password' : 'text'" name="pass" ngModel [formControl]="passFormControl" />
+          <input matInput [type]="hide() ? 'password' : 'text'" name="pass" ngModel />
           <button
             mat-icon-button
             matSuffix

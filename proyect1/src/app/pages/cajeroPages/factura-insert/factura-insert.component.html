@@ -110,6 +110,7 @@
 >
   <div class="flex">
     <table class="table">
+      <caption>List of users</caption>
       <thead>
         <tr>
           <th scope="col">Codigo</th>
@@ -118,6 +119,16 @@
           <th scope="col">total</th>
         </tr>
       </thead>
+      <tbody>
+          @for (item of productFac; track $index) {
+            <tr>
+              <th> {{item.cod_producto}} </th>
+              <td> {{item.name}} </td>
+              <td> {{item.cantidad}} </td>
+              <td> {{item.total}} </td>
+            </tr>
+          }
+      </tbody>
     </table>
   </div>
 </div>

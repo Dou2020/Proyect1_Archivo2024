@@ -192,7 +192,7 @@ $$ LANGUAGE plpgsql;
 
 DROP TRIGGER ajustar_acumulado_cliente ON usuario.tarjeta;
 
--- CREAR EL TRIGGER PARA usuario.tarjeta
+----- CREAR EL TRIGGER PARA usuario.tarjeta ------
 CREATE TRIGGER ajustar_acumulado_cliente
 BEFORE UPDATE ON usuario.tarjeta
 FOR EACH ROW
