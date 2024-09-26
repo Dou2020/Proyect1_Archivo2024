@@ -43,6 +43,7 @@ export class FacturaInsertComponent implements OnInit {
   addProducts: any[] = [];
   factura: any = {};
   productFac: any[] = [];
+  totalFactura: number = 0;
 
   @Input() cajero: any[]=[];
 
@@ -85,7 +86,25 @@ export class FacturaInsertComponent implements OnInit {
     this.fact.viewProductFacPost({no_factura: this.factura?.no_factura}).subscribe({
       next:(value) =>{
         this.productFac = value;
+        this.getTotalFactura()
       }, error:(err) =>{
+        console.log(err);
+      }
+    })
+  }
+
+  getDescuentoFactura(value:NgForm){
+    console.log(value)
+
+    this.usuario[0]?.no_card
+    
+  }
+
+  getTotalFactura(){
+    this.fact.totalFacturaPost({no_factura: this.factura?.no_factura}).subscribe({
+      next:(value)=>{
+        this.totalFactura = value[0]?.total_pagar;
+      }, error:(err)=>{
         console.log(err);
       }
     })

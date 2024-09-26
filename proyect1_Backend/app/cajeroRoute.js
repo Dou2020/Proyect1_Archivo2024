@@ -39,4 +39,16 @@ module.exports = (app) => {
           res.status(500).send(err.message);
           }
       }); 
+
+      app.post('/api/cajero/totalFactura', async (req, res) => {
+        try {
+          const {no_factura} = req.body || null;
+          console.log("View Product FACTURA NO. "+no_factura);
+          // no requiere ningun valor
+          const result = await dbConnect.connect().query('SELECT SUM(total) AS total_pagar FROM contador.detalle_factura WHERE no_factura = $1',[no_factura]);
+          res.json(result.rows);
+          } catch (err) {
+          res.status(500).send(err.message);
+          }
+      }); 
 }

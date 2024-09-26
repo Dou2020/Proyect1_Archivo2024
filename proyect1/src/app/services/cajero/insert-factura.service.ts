@@ -9,7 +9,8 @@ export class InsertFacturaService {
   private apiUrl = "http://localhost:3002/api/cajero/InsertFacturaInit";
   private apiUrl2 = "http://localhost:3002/api/cajero/InsertProductFactura";
   private apiUrl3 = "http://localhost:3002/api/cajero/viewProductFactura"
-
+  private apiUrl4 = "http://localhost:3002/api/cajero/totalFactura"
+  
   constructor(private http:HttpClient) {   }
 
   insertFacturaPost(value:any){
@@ -22,5 +23,8 @@ export class InsertFacturaService {
 
   viewProductFacPost(value:any){
     return this.http.post<any[]>(this.apiUrl3,value);
+  }
+  totalFacturaPost(value:any){
+    return this.http.post<any[]>(this.apiUrl4,value);
   }
 }

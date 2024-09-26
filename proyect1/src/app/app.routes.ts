@@ -9,6 +9,7 @@ import { ProductDetailComponent } from './pages/bodegaPages/product-detail/produ
 import { CreateEmpleadoComponent } from './pages/adminPages/create-empleado/create-empleado.component';
 import { ViewUserComponent } from './pages/adminPages/view-user/view-user.component';
 import { ViewCardsComponent } from './pages/adminPages/view-cards/view-cards.component';
+import { ViewReportComponent } from './pages/adminPages/view-report/view-report.component';
 
 export const routes: Routes = [
     {path:'',component:InicioComponent},
@@ -17,6 +18,7 @@ export const routes: Routes = [
     {path:'admin',component:AdminComponent},
     {path:'admin/viewUsers',component: AdminComponent},
     {path:'admin/addUser',component:CreateEmpleadoComponent},
+    {path:'admin/reports', component: ViewReportComponent},
     {path:'admin/viewCard',component:ViewCardsComponent},
     {path:'admin/insertUser',component:ViewUserComponent},  // form of the insert Employee
     {path:'admin/updateUser/:usuario',component:ViewUserComponent}, // form of the update Employee

@@ -22,6 +22,34 @@ EXCEPTION
 END; 
 $$;
 
+--------------Ingresar Descuento de puntos-----------------
+DROP PROCEDURE contador.insert_productfactura;
+CREATE OR REPLACE PROCEDURE contador.insert_descuFactura(
+    no_card VARCHAR, 
+    des DECIMAL, 
+     fac VARCHAR
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+
+    -- AGREGA EL DESCUENTO A LA FACTURA
+    UPDATE contador.factura
+    SET total_descuento = des
+    WHERE no_factura = fac;
+    -- ACTUALIZA LA CANTIDAD DE PUNTOS CANJEADO
+    SELECT usuario.update_puntos_canjeado(no_card, des);
+
+    RAISE NOTICE 'UPDATE FACTURA DESCUENTO %  FACTURA NO. %', des, fac;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE NOTICE 'ERROR, UPDATE FACTURA DESCUENTO %  FACTURA NO. %', des, fac;
+        ROLLBACK;
+END; 
+$$;
+
+CALL contador.insert_descuFactura('1234',5,'004')
 
 --------------Ingresar producto a factura -----------------
 DROP PROCEDURE contador.insert_productfactura;
@@ -124,7 +152,7 @@ CALL contador.insert_productFactura('001','C1',1);
 ------------VISTA DE DETALLE COMPRA -----------------
 DROP VIEW contador.detalle_factura;
 CREATE VIEW contador.detalle_factura AS 
-SELECT a.no_factura, a.total_descuento, c.cod_producto, e.name, d.cantidad , c.precio, (c.precio * d.cantidad) AS total
+SELECT a.no_factura, a.nit, a.total_descuento, b.subcursal, c.cod_producto, e.name, d.cantidad , c.precio, (c.precio * d.cantidad) AS total
 FROM contador.factura a
 RIGHT JOIN personal.empleado b
 ON a.user_empleado = b.usuario
@@ -144,6 +172,33 @@ WHERE no_factura ='001'; --search of no_factura--
 SELECT SUM(total) AS total_pagar
 FROM contador.detalle_factura 
 WHERE no_factura = '004'; --search of no_factura--
+
+---Top de Facturas mas grandes----
+SELECT no_factura, subcursal, SUM(total) AS total_factura
+FROM contador.detalle_factura 
+GROUP BY no_factura, subcursal
+ORDER BY total_factura DESC;
+
+-- TOP DE 10 PRODUCTOS MAS VENDIDOS---
+SELECT cod_producto, name, SUM(cantidad) AS total_producto 
+FROM contador.detalle_factura
+GROUP BY cod_producto,name
+ORDER BY total_producto DESC
+LIMIT 10;
+
+---TOP DE ventas por subcursal---
+SELECT subcursal, SUM(total) AS total_venta
+FROM contador.detalle_factura
+GROUP BY subcursal
+ORDER BY total_venta DESC;
+
+--TOP 10 DE CLIENTES MAS HAN GASTADO--
+SELECT nit, SUM(total) AS total_compra
+FROM contador.detalle_factura
+GROUP BY nit
+ORDER BY total_compra DESC
+LIMIT 10;
+
 
 ------------ CALCULAR EL TOTAL DE PODUCTO EN ESTANTE Y BODEGA ---------------
 DROP VIEW almacen.total_product;

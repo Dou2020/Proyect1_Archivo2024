@@ -8,7 +8,7 @@ const admin = require('./adminRoute');
 const bodega = require('./bodegaRoute');
 const client = require('./clientRoute');
 const cajero = require('./cajeroRoute');
-
+const report = require('./reportRoute');
 
 const app = express();
 
@@ -23,6 +23,7 @@ admin(app);
 bodega(app);
 client(app);
 cajero(app);
+report(app);
 
 
 

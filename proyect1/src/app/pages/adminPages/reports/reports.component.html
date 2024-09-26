@@ -1,0 +1,107 @@
+<div
+  class="d-flex justify-content-center text-bg-secondary"
+  style="height: 100vh; width: 82vw"
+>
+  <div class="d-flex flex-column">
+    <div class="table-responsive">
+      <table
+        class="table table-secondary table-hover caption-top"
+        style="width: 60vw"
+      >
+        <caption>
+          Top Ventas mas Grandes
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">no_factura</th>
+            <th scope="col">subcursal</th>
+            <th scope="col">total factura</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of topVentas; track $index) {
+          <tr>
+            <td>{{ item.no_factura }}</td>
+            <td>{{ item.subcursal }}</td>
+            <td>{{ item.total_factura }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <div class="table-responsive">
+      <table
+        class="table table-secondary table-hover caption-top"
+        style="width: 60vw"
+      >
+        <caption>
+          Top Subcursales
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Subcursal</th>
+            <th scope="col">Total Compra</th>
+          </tr>
+        </thead>
+        <tbody>
+            @for (item of topSubcursales; track $index) {
+            <tr>
+              <td>{{ item.subcursal }}</td>
+              <td>{{ item.total_venta }}</td>
+            </tr>
+            }
+          </tbody>
+      </table>
+    </div>
+    <div class="table-responsive">
+        <table
+          class="table table-secondary table-hover caption-top"
+          style="width: 60vw"
+        >
+          <caption>
+            Top Articulos 
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">cod producto</th>
+              <th scope="col">nombre</th>
+              <th scope="col">Total Compra</th>
+            </tr>
+          </thead>
+          <tbody>
+              @for (item of topArticulos; track $index) {
+              <tr>
+                <td>{{ item.cod_producto }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.total_producto }}</td>
+              </tr>
+              }
+            </tbody>
+        </table>
+      </div>
+      <div class="table-responsive">
+        <table
+          class="table table-secondary table-hover caption-top"
+          style="width: 60vw"
+        >
+          <caption>
+            Top Clientes
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">nit</th>
+              <th scope="col">Total Compra</th>
+            </tr>
+          </thead>
+          <tbody>
+              @for (item of topClientes; track $index) {
+              <tr>
+                <td>{{ item.nit }}</td>
+                <td>{{ item.total_compra }}</td>
+              </tr>
+              }
+            </tbody>
+        </table>
+      </div>
+  </div>
+</div>

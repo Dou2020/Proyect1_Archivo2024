@@ -50,6 +50,7 @@
   style="min-height: 5%; min-width: 800px"
 >
   <div class="flex justify-content-center align-content-center flex-wrap">
+    <form #des="ngForm" class="example-form" >
     <mat-form-field floatLabel="always">
       {{ usuario[0]?.puntos }}
       <mat-label>Cantidad de Descuento</mat-label>
@@ -65,7 +66,8 @@
       <span matTextPrefix>Puntos-&nbsp;</span>
       <!-- <span matTextSuffix>.00</span> -->
     </mat-form-field>
-    <a mat-button (click)="getCLient(f)">aplicar</a>
+    <a mat-button (click)="getDescuentoFactura(des)">aplicar</a>
+  </form>
   </div>
 </div>
 
@@ -110,7 +112,7 @@
 >
   <div class="flex">
     <table class="table">
-      <caption>List of users</caption>
+      <caption>{{ totalFactura }}</caption>
       <thead>
         <tr>
           <th scope="col">Codigo</th>
