@@ -1,6 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import {FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators} from '@angular/forms';
+import {FormControl, FormGroup, FormsModule, NgForm, NgModel, ReactiveFormsModule, Validators} from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,6 +10,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { ViewProductService } from '../../../services/bodega/view-product.service';
 import { ViewClientService } from '../../../services/cajero/view-client.service';
+
+import {MatTableModule} from '@angular/material/table';
 
 @Component({
   selector: 'app-factura-insert',
@@ -23,7 +25,8 @@ import { ViewClientService } from '../../../services/cajero/view-client.service'
     AsyncPipe,
     MatSelectModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule,
   ],
   templateUrl: './factura-insert.component.html',
   styleUrl: './factura-insert.component.css'
@@ -34,8 +37,10 @@ export class FacturaInsertComponent implements OnInit {
   noFormControl = new FormControl('', [Validators.required]);
   nitFormControl = new FormControl('', [Validators.required]);
 
-  usuario: any[]= [];
-  productos: any[]=[];
+  usuario: any[] = [];
+  productos: any[] = [];
+  addProducts: any[] = [];
+  factura: any = {};
 
   @Input() cajero: any[]=[];
 
@@ -57,6 +62,7 @@ export class FacturaInsertComponent implements OnInit {
     })
   }
 
+  // LISTADO DE PRODUCTO
   getProducts(){
 
     const p = new FormGroup({
@@ -73,8 +79,22 @@ export class FacturaInsertComponent implements OnInit {
   }
 
   onSubmit(f: NgForm) {
-    console.log(f.value); // { first: '', last: '' 
   
+    console.log(f.value); // { first: '', last: '' 
+    this.factura = f.value;
+  
+  }
+
+  addProduct(f:NgForm){
+    //console.log(f.value)
+    //console.log(this.factura)
+    const final = {
+      no_factura: this.factura.no_factura,
+      ...f.value
+    }
+
+    console.log(final);
+    
   }
 
 }

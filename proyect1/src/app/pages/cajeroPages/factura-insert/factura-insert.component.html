@@ -1,30 +1,17 @@
 <div
   class="flex justify-content-center align-content-center flex-wrap"
-  style="min-height: 40%; min-width: 800px"
+  style="min-height: 30%; min-width: 800px"
 >
   <div class="flex align-items-center justify-content-center">
     <form #f="ngForm" class="example-form" (ngSubmit)="onSubmit(f)">
-      <h1>Ingresar Venta</h1>
+      <h3>Ingresar Venta</h3>
       <mat-form-field class="example-full-width">
         <mat-label>No. Factura</mat-label>
-        <input
-          matInput
-          placeholder="Ex. 1564"
-          name="no_factura"
-          ngModel
-        />
+        <input matInput placeholder="Ex. 1564" name="no_factura" ngModel />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Nit</mat-label>
-        <input
-          matInput
-          placeholder="Ex. 156464"
-          name="nit"
-          ngModel
-        />
-        @if (nitFormControl.hasError('required')) {
-        <mat-error>Nit is <strong>required</strong></mat-error>
-        }
+        <input matInput placeholder="Ex. 156464" name="nit" ngModel />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Nombre Cliente</mat-label>
@@ -33,11 +20,8 @@
           placeholder="Ex. Eduardo"
           name="cliente"
           disabled="{{ usuario.length == 1 ? true : false }}"
-          ngModel="{{usuario[0]?.nombre}}"
+          ngModel="{{ usuario[0]?.nombre }}"
         />
-        @if (nitFormControl.hasError('required')) {
-        <mat-error>Name of the user is <strong>required</strong></mat-error>
-        }
       </mat-form-field>
       <a mat-button (click)="getCLient(f)">Buscar</a>
       <br />
@@ -51,23 +35,6 @@
           ngModel="{{ cajero[0]?.usuario }}"
         />
       </mat-form-field>
-
-      <mat-form-field floatLabel="always">
-        {{usuario[0]?.puntos}}
-        <mat-label>Cantidad de Descuento</mat-label>
-        <input
-          matInput
-          type="number"
-          name="descuento"
-          class="example-right-align"
-          placeholder="0"
-          value=0
-          ngModel
-        />
-        <span matTextPrefix>Puntos-&nbsp;</span>
-        <!-- <span matTextSuffix>.00</span> -->
-      </mat-form-field>
-
       <div class="overflow-hidden">
         <div class="flex justify-content-center">
           <button mat-flat-button style="width: 100%">Enviar</button>
@@ -76,41 +43,81 @@
     </form>
   </div>
 </div>
+
+<!-- Aculumar Puntos -->
+<div
+  class="flex justify-content-center flex-wrap"
+  style="min-height: 5%; min-width: 800px"
+>
+  <div class="flex justify-content-center align-content-center flex-wrap">
+    <mat-form-field floatLabel="always">
+      {{ usuario[0]?.puntos }}
+      <mat-label>Cantidad de Descuento</mat-label>
+      <input
+        matInput
+        type="number"
+        name="descuento"
+        class="example-right-align"
+        placeholder="0"
+        ngModel="{{ 0 }}"
+        style="width: 80%;"
+      />
+      <span matTextPrefix>Puntos-&nbsp;</span>
+      <!-- <span matTextSuffix>.00</span> -->
+    </mat-form-field>
+    <a mat-button (click)="getCLient(f)">aplicar</a>
+  </div>
+</div>
+
 <!-- List Producto -->
 <div
   class="flex justify-content-center flex-wrap"
-  style="min-height: 40%; min-width: 800px"
+  style="min-width: 800px"
 >
-  <div class="flex">
-    <form #f="ngForm" class="example-form" (ngSubmit)="onSubmit(f)">
-      <h3>Ingresar Articulo</h3>
-      <mat-form-field >
+  <div class="flex justify-content-center align-content-center flex-wrap">
+    <form #p="ngForm" class="example-form" (ngSubmit)="addProduct(p)">
+      <h5>Ingresar Articulo</h5>
+      <mat-form-field>
         <mat-label>Select Producto</mat-label>
-          <mat-select name="cod_producto" ngModel >
-            @for (item of productos; track $index) {
-                @if (item.cantidad != 0) {
-                    <mat-option value="{{item.cod_producto}}" >{{item.cantidad}} {{item.name}}</mat-option>
-                }
-            }
-          </mat-select>
+        <mat-select name="cod_producto" ngModel>
+          @for (item of productos; track $index) { @if (item.cantidad != 0) {
+          <mat-option value="{{ item.cod_producto }}"
+            >{{ item.cantidad }} {{ item.name }}</mat-option
+          >
+          } }
+        </mat-select>
       </mat-form-field>
       <mat-form-field floatLabel="always">
         <mat-label>Cantidad</mat-label>
         <input
           matInput
           type="number"
-          name="descuento"
+          name="cantidad"
           class="example-right-align"
           placeholder="0"
           ngModel
         />
       </mat-form-field>
-
-      <div class="overflow-hidden">
-        <div class="flex justify-content-center">
-          <button mat-flat-button style="width: 100%">Agregar</button>
-        </div>
-      </div>
+      <button mat-button>agregar</button>
     </form>
+  </div>
+</div>
+
+<!-- Table of the colum -->
+<div
+  class="flex justify-content-center flex-wrap"
+  style=" min-width: 800px"
+>
+  <div class="flex">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Codigo</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">cantidad</th>
+          <th scope="col">total</th>
+        </tr>
+      </thead>
+    </table>
   </div>
 </div>
