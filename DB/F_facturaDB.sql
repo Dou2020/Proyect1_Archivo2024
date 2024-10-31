@@ -171,7 +171,7 @@ WHERE no_factura ='001'; --search of no_factura--
 ----------------Total a cancelar de factura EN VIEW-------------------------
 SELECT SUM(total) AS total_pagar
 FROM contador.detalle_factura 
-WHERE no_factura = '004'; --search of no_factura--
+WHERE no_factura = '001'; --search of no_factura--
 
 ---Top de Facturas mas grandes----
 SELECT no_factura, subcursal, SUM(total) AS total_factura

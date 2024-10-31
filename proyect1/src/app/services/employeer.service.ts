@@ -14,7 +14,7 @@ export class EmployeerService {
   
   constructor(private http: HttpClient) { }
 
-  private usuario: any[] = [] ;
+  private usuario: any[] = [];
 
   postType(user:any[]) {
     console.log("valores: ",user)
@@ -32,4 +32,4 @@ export class EmployeerService {
     this.usuario = usuario;
   }
 
-}
+}  
